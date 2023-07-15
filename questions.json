@@ -1,0 +1,293 @@
+[
+    {
+        "id": "personal_goal",
+        "text": "Quel est votre objectif personnel ?",
+        "inputType": "Radio",
+        "inputProps": {},
+        "responses": [
+            {"id": "learn_new_skill", "text": "Apprendre une nouvelle compétence"},
+            {"id": "career_change", "text": "Changer de carrière"},
+            {"id": "career_advance", "text": "Avancer dans ma carrière actuelle"},
+            {"id": "other", "text": "Autre"}
+        ],
+        "nextQuestions": [
+            {
+                "id": "current_status",
+                "conditions": {
+                    "OR": [
+                        {
+                            "id": "personal_goal",
+                            "condition": {
+                                "OR": ["learn_new_skill", "career_change", "career_advance"]
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "id": "other_goal",
+                "conditions": {
+                    "OR": [
+                        {
+                            "id": "personal_goal",
+                            "condition": {
+                                "OR": ["other"]
+                            }
+                        }
+                    ]
+                }
+            }
+        ]
+    },
+    {
+        "id": "current_status",
+        "text": "Quel est votre statut actuel ?",
+        "inputType": "Dropdown",
+        "inputProps": {},
+        "responses": [
+            {"id": "full_time", "text": "Employé à temps plein"},
+            {"id": "part_time", "text": "Employé à temps partiel"},
+            {"id": "independent", "text": "Indépendant"},
+            {"id": "unemployed", "text": "En recherche d'emploi"}
+        ],
+        "nextQuestions": [
+            {
+                "id": "desired_contract",
+                "conditions": {
+                    "OR": [
+                        {
+                            "id": "current_status",
+                            "condition": {
+                                "OR": ["full_time", "part_time", "independent", "unemployed"]
+                            }
+                        }
+                    ]
+                }
+            }
+        ]
+    },
+    {
+        "id": "desired_contract",
+        "text": "Quel type de contrat recherchez-vous ?",
+        "inputType": "Radio",
+        "inputProps": {},
+        "responses": [
+            {"id": "full_time_contract", "text": "Contrat à temps plein"},
+            {"id": "part_time_contract", "text": "Contrat à temps partiel"},
+            {"id": "freelance", "text": "Freelance"},
+            {"id": "open_to_any", "text": "Ouvert à toute proposition"}
+        ],
+        "nextQuestions": [
+            {
+                "id": "experience_years",
+                "conditions": {
+                    "OR": [
+                        {
+                            "id": "desired_contract",
+                            "condition": {
+                                "OR": ["full_time_contract", "part_time_contract", "freelance", "open_to_any"]
+                            }
+                        }
+                    ]
+                }
+            }
+        ]
+    },
+    {
+        "id": "experience_years",
+        "text": "Combien d'années d'expérience avez-vous dans le domaine de la technologie ?",
+        "inputType": "Slider",
+        "inputProps": {
+            "min": 0,
+            "max": 50,
+            "step": 1
+        },
+        "nextQuestions": [
+            {
+                "id": "high_experience",
+                "conditions": {
+                    "AND": [
+                        {
+                            "id": "experience_years",
+                            "condition": {
+                                "comparison": [
+                                    {
+                                        "type": ">=",
+                                        "value": 10
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "id": "mid_experience",
+                "conditions": {
+                    "AND": [
+                        {
+                            "id": "experience_years",
+                            "condition": {
+                                "comparison": [
+                                    {
+                                        "type": ">=",
+                                        "value": 5
+                                    },
+                                    {
+                                        "type": "<",
+                                        "value": 10
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "id": "low_experience",
+                "conditions": {
+                    "AND": [
+                        {
+                            "id": "experience_years",
+                            "condition": {
+                                "comparison": [
+                                    {
+                                        "type": "<",
+                                        "value": 5
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            }
+        ]
+    },
+    {
+        "id": "high_experience",
+        "text": "Quelle est votre principale compétence technique ?",
+        "inputType": "Textbox",
+        "inputProps": {},
+        "nextQuestions": [
+            {
+                "id": "job_search_length",
+                "conditions": {
+                    "AND": [
+                        {
+                            "id": "high_experience",
+                            "condition": {
+                                "OR": []
+                            }
+                        }
+                    ]
+                }
+            }
+        ]
+    },
+    {
+        "id": "mid_experience",
+        "text": "Quelle est votre principale compétence technique ?",
+        "inputType": "Textbox",
+        "inputProps": {},
+        "nextQuestions": [
+            {
+                "id": "job_search_length",
+                "conditions": {
+                    "AND": [
+                        {
+                            "id": "mid_experience",
+                            "condition": {
+                                "OR": []
+                            }
+                        }
+                    ]
+                }
+            }
+        ]
+    },
+    {
+        "id": "low_experience",
+        "text": "Quelle est votre principale compétence technique ?",
+        "inputType": "Textbox",
+        "inputProps": {},
+        "nextQuestions": [
+            {
+                "id": "job_search_length",
+                "conditions": {
+                    "AND": [
+                        {
+                            "id": "low_experience",
+                            "condition": {
+                                "OR": []
+                            }
+                        }
+                    ]
+                }
+            }
+        ]
+    },
+    {
+        "id": "job_search_length",
+        "text": "Depuis combien de temps recherchez-vous un emploi ?",
+        "inputType": "Slider",
+        "inputProps": {
+            "min": 0,
+            "max": 24,
+            "step": 1
+        },
+        "nextQuestions": [
+            {
+                "id": "job_search_difficulty",
+                "conditions": {
+                    "AND": [
+                        {
+                            "id": "job_search_length",
+                            "condition": {
+                                "comparison": [
+                                    {
+                                        "type": ">=",
+                                        "value": 0
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            }
+        ]
+    },
+    {
+        "id": "job_search_difficulty",
+        "text": "Comment qualifieriez-vous la difficulté de votre recherche d'emploi jusqu'à présent ?",
+        "inputType": "Radio",
+        "inputProps": {},
+        "responses": [
+            {"id": "very_difficult", "text": "Très difficile"},
+            {"id": "somewhat_difficult", "text": "Plutôt difficile"},
+            {"id": "neutral", "text": "Neutre"},
+            {"id": "somewhat_easy", "text": "Plutôt facile"},
+            {"id": "very_easy", "text": "Très facile"}
+        ],
+        "nextQuestions": [
+            {
+                "id": "final_question",
+                "conditions": {
+                    "OR": [
+                        {
+                            "id": "job_search_difficulty",
+                            "condition": {
+                                "OR": ["very_difficult", "somewhat_difficult", "neutral", "somewhat_easy", "very_easy"]
+                            }
+                        }
+                    ]
+                }
+            }
+        ]
+    },
+    {
+        "id": "final_question",
+        "text": "Quelle est la principale raison qui vous a poussé à chercher un nouvel emploi ?",
+        "inputType": "Textbox",
+        "inputProps": {}
+    }
+]

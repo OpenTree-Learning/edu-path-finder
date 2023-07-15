@@ -1,0 +1,16 @@
+.questionLayout {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+.questionContainer {
+    width: auto;
+    height: auto;
+    border: 1px solid #7f7f7f;
+    border-radius: 5px;
+    padding: 20px;
+    box-shadow: #7f7f7f;
+}
