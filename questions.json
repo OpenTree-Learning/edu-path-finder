@@ -1,293 +1,572 @@
 [
-    {
-        "id": "personal_goal",
-        "text": "Quel est votre objectif personnel ?",
-        "inputType": "Radio",
-        "inputProps": {},
-        "responses": [
-            {"id": "learn_new_skill", "text": "Apprendre une nouvelle compétence"},
-            {"id": "career_change", "text": "Changer de carrière"},
-            {"id": "career_advance", "text": "Avancer dans ma carrière actuelle"},
-            {"id": "other", "text": "Autre"}
-        ],
-        "nextQuestions": [
-            {
-                "id": "current_status",
-                "conditions": {
-                    "OR": [
-                        {
-                            "id": "personal_goal",
-                            "condition": {
-                                "OR": ["learn_new_skill", "career_change", "career_advance"]
-                            }
-                        }
-                    ]
-                }
-            },
-            {
-                "id": "other_goal",
-                "conditions": {
-                    "OR": [
-                        {
-                            "id": "personal_goal",
-                            "condition": {
-                                "OR": ["other"]
-                            }
-                        }
-                    ]
-                }
-            }
-        ]
+  {
+    "id": "start-your-journey",
+    "text": "Bienvenue ! Êtes-vous prêt(e) à commencer votre parcours d'apprentissage ?",
+    "inputType": "single",
+    "inputProps": {},
+    "responses": [
+      {"id": "yes", "text": "Oui"},
+      {"id": "no", "text": "Non"}
+    ]
+  },
+  {
+    "id": "experience",
+    "text": "Quel est votre niveau d'expérience en programmation ?",
+    "inputType": "single",
+    "inputProps": {},
+    "responses": [
+      {"id": "beginner", "text": "Débutant(e)"},
+      {"id": "intermediate", "text": "Intermédiaire"},
+      {"id": "advanced", "text": "Avancé(e)"}
+    ],
+    "nextQuestions": [
+      {
+        "id": "context",
+        "conditions": {
+          "AND": [
+            {"id": "experience", "condition": {"OR": ["beginner", "intermediate", "advanced"]}}
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "context",
+    "text": "Quel est votre contexte de formation actuel ?",
+    "inputType": "single",
+    "inputProps": {},
+    "responses": [
+      {"id": "student", "text": "Étudiant(e)"},
+      {"id": "career_switch", "text": "Reconversion professionnelle"},
+      {"id": "experienced_dev", "text": "Développeur(se) expérimenté(e)"}
+    ],
+    "nextQuestions": [
+      {
+        "id": "interests",
+        "conditions": {
+          "AND": [
+            {"id": "context", "condition": {"OR": ["student", "career_switch", "experienced_dev"]}}
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "interests",
+    "text": "Quels sont les domaines qui vous passionnent dans le domaine de la technologie ?",
+    "inputType": "multi",
+    "inputProps": {
+      "order": "random",
+      "min": 1,
+      "max": 3
     },
-    {
-        "id": "current_status",
-        "text": "Quel est votre statut actuel ?",
-        "inputType": "Dropdown",
-        "inputProps": {},
-        "responses": [
-            {"id": "full_time", "text": "Employé à temps plein"},
-            {"id": "part_time", "text": "Employé à temps partiel"},
-            {"id": "independent", "text": "Indépendant"},
-            {"id": "unemployed", "text": "En recherche d'emploi"}
-        ],
-        "nextQuestions": [
-            {
-                "id": "desired_contract",
-                "conditions": {
-                    "OR": [
-                        {
-                            "id": "current_status",
-                            "condition": {
-                                "OR": ["full_time", "part_time", "independent", "unemployed"]
-                            }
-                        }
-                    ]
-                }
-            }
-        ]
+    "responses": [
+      {"id": "web_dev", "text": "Développement Web"},
+      {"id": "data_science", "text": "Science des données"},
+      {"id": "mobile_dev", "text": "Développement mobile"},
+      {"id": "machine_learning", "text": "Apprentissage automatique"},
+      {"id": "cybersecurity", "text": "Cybersécurité"},
+      {"id": "cloud_computing", "text": "Cloud computing"},
+      {"id": "ui_ux", "text": "UI/UX design"},
+      {"id": "other", "text": "Autre (précisez)"}
+    ],
+    "nextQuestions": [
+      {
+        "id": "goals",
+        "conditions": {
+          "AND": [
+            {"id": "interests", "condition": {"OR": ["web_dev", "data_science", "mobile_dev", "machine_learning"]}}
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "goals",
+    "text": "Quels sont vos objectifs personnels ou professionnels pour votre formation ?",
+    "inputType": "multi",
+    "inputProps": {
+      "order": "default",
+      "min": 1,
+      "max": 5
     },
-    {
-        "id": "desired_contract",
-        "text": "Quel type de contrat recherchez-vous ?",
-        "inputType": "Radio",
-        "inputProps": {},
-        "responses": [
-            {"id": "full_time_contract", "text": "Contrat à temps plein"},
-            {"id": "part_time_contract", "text": "Contrat à temps partiel"},
-            {"id": "freelance", "text": "Freelance"},
-            {"id": "open_to_any", "text": "Ouvert à toute proposition"}
-        ],
-        "nextQuestions": [
-            {
-                "id": "experience_years",
-                "conditions": {
-                    "OR": [
-                        {
-                            "id": "desired_contract",
-                            "condition": {
-                                "OR": ["full_time_contract", "part_time_contract", "freelance", "open_to_any"]
-                            }
-                        }
-                    ]
-                }
-            }
-        ]
+    "responses": [
+      {"id": "improve_skills", "text": "Améliorer mes compétences actuelles"},
+      {"id": "career_change", "text": "Changer de carrière"},
+      {"id": "new_career", "text": "Commencer une nouvelle carrière"},
+      {"id": "hobby", "text": "Apprendre pour le loisir"},
+      {"id": "certification", "text": "Obtenir une certification"},
+      {"id": "other", "text": "Autre (précisez)"}
+    ],
+    "nextQuestions": [
+      {
+        "id": "learning_method",
+        "conditions": {
+          "AND": [
+            {"id": "goals", "condition": {"OR": ["improve_skills", "career_change", "new_career"]}}
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "learning_method",
+    "text": "Quelle est votre méthode d'apprentissage préférée ?",
+    "inputType": "single",
+    "inputProps": {},
+    "responses": [
+      {"id": "self_study", "text": "Étude en autodidacte"},
+      {"id": "online_courses", "text": "Cours en ligne"},
+      {"id": "bootcamps", "text": "Bootcamps"},
+      {"id": "tutorials", "text": "Tutoriels et vidéos"},
+      {"id": "peer_learning", "text": "Apprentissage entre pairs"},
+      {"id": "classroom", "text": "En salle de classe"}
+    ],
+    "nextQuestions": [
+      {
+        "id": "additional_info",
+        "conditions": {
+          "AND": [
+            {"id": "learning_method", "condition": {"OR": ["self_study", "online_courses", "bootcamps"]}}
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "additional_info",
+    "text": "Avez-vous des informations complémentaires que vous souhaitez partager concernant votre besoin de formation ?",
+    "inputType": "text",
+    "inputProps": {}
+  },
+  {
+    "id": "coding_experience",
+    "text": "Quelle est votre expérience en programmation ?",
+    "inputType": "multi",
+    "inputProps": {
+      "order": "default",
+      "min": 1,
+      "max": 5
     },
-    {
-        "id": "experience_years",
-        "text": "Combien d'années d'expérience avez-vous dans le domaine de la technologie ?",
-        "inputType": "Slider",
-        "inputProps": {
-            "min": 0,
-            "max": 50,
-            "step": 1
-        },
-        "nextQuestions": [
-            {
-                "id": "high_experience",
-                "conditions": {
-                    "AND": [
-                        {
-                            "id": "experience_years",
-                            "condition": {
-                                "comparison": [
-                                    {
-                                        "type": ">=",
-                                        "value": 10
-                                    }
-                                ]
-                            }
-                        }
-                    ]
-                }
-            },
-            {
-                "id": "mid_experience",
-                "conditions": {
-                    "AND": [
-                        {
-                            "id": "experience_years",
-                            "condition": {
-                                "comparison": [
-                                    {
-                                        "type": ">=",
-                                        "value": 5
-                                    },
-                                    {
-                                        "type": "<",
-                                        "value": 10
-                                    }
-                                ]
-                            }
-                        }
-                    ]
-                }
-            },
-            {
-                "id": "low_experience",
-                "conditions": {
-                    "AND": [
-                        {
-                            "id": "experience_years",
-                            "condition": {
-                                "comparison": [
-                                    {
-                                        "type": "<",
-                                        "value": 5
-                                    }
-                                ]
-                            }
-                        }
-                    ]
-                }
-            }
-        ]
+    "responses": [
+      {"id": "never_coded", "text": "Je n'ai jamais programmé"},
+      {"id": "some_exposure", "text": "J'ai eu quelques notions de programmation"},
+      {"id": "hobbyist", "text": "Je code en tant qu'amateur"},
+      {"id": "student", "text": "Je suis étudiant(e) en informatique"},
+      {"id": "professional", "text": "Je travaille en tant que développeur(se)"}
+    ],
+    "nextQuestions": [
+      {
+        "id": "programming_languages",
+        "conditions": {
+          "AND": [
+            {"id": "coding_experience", "condition": {"OR": ["some_exposure", "hobbyist", "student", "professional"]}}
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "programming_languages",
+    "text": "Quels langages de programmation maîtrisez-vous ou avez-vous l'intention d'apprendre ?",
+    "inputType": "multi-suggestion",
+    "inputProps": {
+      "order": "random",
+      "min": 1,
+      "max": 5
     },
-    {
-        "id": "high_experience",
-        "text": "Quelle est votre principale compétence technique ?",
-        "inputType": "Textbox",
-        "inputProps": {},
-        "nextQuestions": [
-            {
-                "id": "job_search_length",
-                "conditions": {
-                    "AND": [
-                        {
-                            "id": "high_experience",
-                            "condition": {
-                                "OR": []
-                            }
-                        }
-                    ]
-                }
-            }
-        ]
-    },
-    {
-        "id": "mid_experience",
-        "text": "Quelle est votre principale compétence technique ?",
-        "inputType": "Textbox",
-        "inputProps": {},
-        "nextQuestions": [
-            {
-                "id": "job_search_length",
-                "conditions": {
-                    "AND": [
-                        {
-                            "id": "mid_experience",
-                            "condition": {
-                                "OR": []
-                            }
-                        }
-                    ]
-                }
-            }
-        ]
-    },
-    {
-        "id": "low_experience",
-        "text": "Quelle est votre principale compétence technique ?",
-        "inputType": "Textbox",
-        "inputProps": {},
-        "nextQuestions": [
-            {
-                "id": "job_search_length",
-                "conditions": {
-                    "AND": [
-                        {
-                            "id": "low_experience",
-                            "condition": {
-                                "OR": []
-                            }
-                        }
-                    ]
-                }
-            }
-        ]
-    },
-    {
-        "id": "job_search_length",
-        "text": "Depuis combien de temps recherchez-vous un emploi ?",
-        "inputType": "Slider",
-        "inputProps": {
-            "min": 0,
-            "max": 24,
-            "step": 1
-        },
-        "nextQuestions": [
-            {
-                "id": "job_search_difficulty",
-                "conditions": {
-                    "AND": [
-                        {
-                            "id": "job_search_length",
-                            "condition": {
-                                "comparison": [
-                                    {
-                                        "type": ">=",
-                                        "value": 0
-                                    }
-                                ]
-                            }
-                        }
-                    ]
-                }
-            }
-        ]
-    },
-    {
-        "id": "job_search_difficulty",
-        "text": "Comment qualifieriez-vous la difficulté de votre recherche d'emploi jusqu'à présent ?",
-        "inputType": "Radio",
-        "inputProps": {},
-        "responses": [
-            {"id": "very_difficult", "text": "Très difficile"},
-            {"id": "somewhat_difficult", "text": "Plutôt difficile"},
-            {"id": "neutral", "text": "Neutre"},
-            {"id": "somewhat_easy", "text": "Plutôt facile"},
-            {"id": "very_easy", "text": "Très facile"}
-        ],
-        "nextQuestions": [
-            {
-                "id": "final_question",
-                "conditions": {
-                    "OR": [
-                        {
-                            "id": "job_search_difficulty",
-                            "condition": {
-                                "OR": ["very_difficult", "somewhat_difficult", "neutral", "somewhat_easy", "very_easy"]
-                            }
-                        }
-                    ]
-                }
-            }
-        ]
-    },
-    {
-        "id": "final_question",
-        "text": "Quelle est la principale raison qui vous a poussé à chercher un nouvel emploi ?",
-        "inputType": "Textbox",
-        "inputProps": {}
+    "responses": [
+      {"id": "javascript", "text": "JavaScript"},
+      {"id": "python", "text": "Python"},
+      {"id": "java", "text": "Java"},
+      {"id": "csharp", "text": "C#"},
+      {"id": "ruby", "text": "Ruby"},
+      {"id": "php", "text": "PHP"},
+      {"id": "go", "text": "Go"},
+      {"id": "rust", "text": "Rust"},
+      {"id": "other", "text": "Autre (précisez)"}
+    ],
+    "nextQuestions": [
+      {
+        "id": "preferred_learning_style",
+        "conditions": {
+          "AND": [
+            {"id": "programming_languages", "condition": {"OR": ["javascript", "python", "java", "csharp", "ruby"]}}
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "preferred_learning_style",
+    "text": "Quel est votre style d'apprentissage préféré ?",
+    "inputType": "single",
+    "inputProps": {},
+    "responses": [
+      {"id": "visual", "text": "Visuel"},
+      {"id": "auditory", "text": "Auditif"},
+      {"id": "read_write", "text": "Lecture/écriture"},
+      {"id": "kinesthetic", "text": "Kinesthésique"}
+    ],
+    "nextQuestions": [
+      {
+        "id": "time_commitment",
+        "conditions": {
+          "AND": [
+            {"id": "preferred_learning_style", "condition": {"OR": ["visual", "auditory", "read_write", "kinesthetic"]}}
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "time_commitment",
+    "text": "Combien de temps êtes-vous prêt(e) à consacrer chaque semaine à votre formation ?",
+    "inputType": "slider",
+    "inputProps": {
+      "min": 1,
+      "max": 40,
+      "step": 1
     }
+  },
+  {
+    "id": "desired_tech_job",
+    "text": "Quel poste dans le domaine de la technologie voudriez-vous occuper idéalement ?",
+    "inputType": "text",
+    "inputProps": {}
+  },
+  {
+    "id": "previous_training",
+    "text": "Avez-vous suivi des formations ou des cours liés à la technologie auparavant ?",
+    "inputType": "single",
+    "inputProps": {},
+    "responses": [
+      {"id": "yes", "text": "Oui"},
+      {"id": "no", "text": "Non"}
+    ],
+    "nextQuestions": [
+      {
+        "id": "training_details",
+        "conditions": {
+          "AND": [
+            {"id": "previous_training", "condition": {"OR": ["yes"]}}
+          ]
+        }
+      },
+      {
+        "id": "programming_experience",
+        "conditions": {
+          "AND": [
+            {"id": "previous_training", "condition": {"OR": ["no"]}}
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "training_details",
+    "text": "Pouvez-vous donner des détails sur les formations ou les cours que vous avez suivis ?",
+    "inputType": "text",
+    "inputProps": {}
+  },
+  {
+    "id": "programming_experience",
+    "text": "Avez-vous de l'expérience en programmation ?",
+    "inputType": "single",
+    "inputProps": {},
+    "responses": [
+      {"id": "yes", "text": "Oui"},
+      {"id": "no", "text": "Non"}
+    ],
+    "nextQuestions": [
+      {
+        "id": "programming_languages_known",
+        "conditions": {
+          "AND": [
+            {"id": "programming_experience", "condition": {"OR": ["yes"]}}
+          ]
+        }
+      },
+      {
+        "id": "tech_challenges",
+        "conditions": {
+          "AND": [
+            {"id": "programming_experience", "condition": {"OR": ["no"]}}
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "programming_languages_known",
+    "text": "Quels langages de programmation connaissez-vous ?",
+    "inputType": "multi",
+    "inputProps": {
+      "order": "default",
+      "min": 1,
+      "max": 5
+    },
+    "responses": [
+      {"id": "javascript", "text": "JavaScript"},
+      {"id": "python", "text": "Python"},
+      {"id": "java", "text": "Java"},
+      {"id": "csharp", "text": "C#"},
+      {"id": "ruby", "text": "Ruby"},
+      {"id": "php", "text": "PHP"},
+      {"id": "go", "text": "Go"},
+      {"id": "rust", "text": "Rust"},
+      {"id": "other", "text": "Autre (précisez)"}
+    ],
+    "nextQuestions": [
+      {
+        "id": "tech_challenges",
+        "conditions": {
+          "AND": [
+            {"id": "programming_languages_known", "condition": {"OR": ["javascript", "python", "java", "csharp", "ruby"]}}
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "tech_challenges",
+    "text": "Quels sont les principaux défis ou obstacles que vous rencontrez dans votre parcours technologique ?",
+    "inputType": "multi",
+    "inputProps": {
+      "order": "default",
+      "min": 1,
+      "max": 5
+    },
+    "responses": [
+      {"id": "lack_of_resources", "text": "Manque de ressources disponibles"},
+      {"id": "difficult_concepts", "text": "Concepts difficiles à comprendre"},
+      {"id": "troubleshooting", "text": "Dépannage et résolution de problèmes"},
+      {"id": "time_management", "text": "Gestion du temps"},
+      {"id": "team_collaboration", "text": "Collaboration en équipe"},
+      {"id": "other", "text": "Autre (précisez)"}
+    ],
+    "nextQuestions": [
+      {
+        "id": "preferred_learning_resources",
+        "conditions": {
+          "AND": [
+            {"id": "tech_challenges", "condition": {"OR": ["lack_of_resources", "difficult_concepts"]}}
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "preferred_learning_resources",
+    "text": "Quels sont vos ressources d'apprentissage préférées ?",
+    "inputType": "multi",
+    "inputProps": {
+      "order": "random",
+      "min": 1,
+      "max": 3
+    },
+    "responses": [
+      {"id": "online_tutorials", "text": "Tutoriels en ligne"},
+      {"id": "video_courses", "text": "Cours vidéo"},
+      {"id": "documentation", "text": "Documentation officielle"},
+      {"id": "books", "text": "Livres"},
+      {"id": "interactive_platforms", "text": "Plateformes interactives"},
+      {"id": "online_communities", "text": "Communautés en ligne"}
+    ],
+    "nextQuestions": [
+      {
+        "id": "preferred_learning_time",
+        "conditions": {
+          "AND": [
+            {"id": "preferred_learning_resources", "condition": {"OR": ["online_tutorials", "video_courses", "documentation"]}}
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "preferred_learning_time",
+    "text": "Quand préférez-vous consacrer du temps à l'apprentissage ?",
+    "inputType": "single",
+    "inputProps": {},
+    "responses": [
+      {"id": "morning", "text": "Le matin"},
+      {"id": "afternoon", "text": "L'après-midi"},
+      {"id": "evening", "text": "Le soir"},
+      {"id": "weekends", "text": "Les week-ends"},
+      {"id": "flexible", "text": "Je suis flexible"}
+    ],
+    "nextQuestions": [
+      {
+        "id": "desired_programming_skills",
+        "conditions": {
+          "AND": [
+            {"id": "preferred_learning_time", "condition": {"OR": ["morning", "afternoon", "evening", "weekends", "flexible"]}}
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "desired_programming_skills",
+    "text": "Quelles compétences en programmation souhaitez-vous acquérir ou améliorer ?",
+    "inputType": "multi",
+    "inputProps": {
+      "order": "default",
+      "min": 1,
+      "max": 5
+    },
+    "responses": [
+      {"id": "frontend_dev", "text": "Développement frontend"},
+      {"id": "backend_dev", "text": "Développement backend"},
+      {"id": "fullstack_dev", "text": "Développement full-stack"},
+      {"id": "database_management", "text": "Gestion de bases de données"},
+      {"id": "software_engineering", "text": "Génie logiciel"},
+      {"id": "mobile_app_dev", "text": "Développement d'applications mobiles"},
+      {"id": "data_analysis", "text": "Analyse de données"},
+      {"id": "cybersecurity", "text": "Cybersécurité"},
+      {"id": "other", "text": "Autre (précisez)"}
+    ],
+    "nextQuestions": [
+      {
+        "id": "additional_comments",
+        "conditions": {
+          "AND": [
+            {"id": "desired_programming_skills", "condition": {"OR": ["frontend_dev", "backend_dev", "fullstack_dev", "mobile_app_dev"]}}
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "current_education",
+    "text": "Quel est votre niveau d'éducation actuel ?",
+    "inputType": "single",
+    "inputProps": {},
+    "responses": [
+      {"id": "high_school", "text": "Diplôme d'études secondaires"},
+      {"id": "associate_degree", "text": "Diplôme d'associé"},
+      {"id": "bachelor_degree", "text": "Licence"},
+      {"id": "master_degree", "text": "Master"},
+      {"id": "doctoral_degree", "text": "Doctorat"},
+      {"id": "other", "text": "Autre (précisez)"}
+    ],
+    "nextQuestions": [
+      {
+        "id": "current_employment",
+        "conditions": {
+          "AND": [
+            {"id": "current_education", "condition": {"OR": ["high_school", "associate_degree", "bachelor_degree", "master_degree", "doctoral_degree"]}}
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "current_employment",
+    "text": "Êtes-vous actuellement employé(e) ?",
+    "inputType": "single",
+    "inputProps": {},
+    "responses": [
+      {"id": "employed_full_time", "text": "Oui, à temps plein"},
+      {"id": "employed_part_time", "text": "Oui, à temps partiel"},
+      {"id": "unemployed", "text": "Non, sans emploi"},
+      {"id": "student", "text": "Non, étudiant(e)"},
+      {"id": "other", "text": "Autre (précisez)"}
+    ],
+    "nextQuestions": [
+      {
+        "id": "employment_field",
+        "conditions": {
+          "AND": [
+            {"id": "current_employment", "condition": {"OR": ["employed_full_time", "employed_part_time"]}}
+          ]
+        }
+      },
+      {
+        "id": "learning_objective",
+        "conditions": {
+          "AND": [
+            {"id": "current_employment", "condition": {"OR": ["unemployed", "student", "other"]}}
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "employment_field",
+    "text": "Dans quel domaine travaillez-vous actuellement ?",
+    "inputType": "text",
+    "inputProps": {}
+  },
+  {
+    "id": "learning_objective",
+    "text": "Quel est votre principal objectif d'apprentissage pour cette formation ?",
+    "inputType": "text",
+    "inputProps": {}
+  },
+  {
+    "id": "preferred_learning_environment",
+    "text": "Préférez-vous apprendre de manière autonome ou en groupe ?",
+    "inputType": "single",
+    "inputProps": {},
+    "responses": [
+      {"id": "autonomous", "text": "Autonome"},
+      {"id": "group", "text": "En groupe"},
+      {"id": "both", "text": "Les deux, selon les circonstances"}
+    ]
+  },
+  {
+    "id": "preferred_learning_duration",
+    "text": "Combien de temps souhaitez-vous consacrer à votre formation chaque jour ?",
+    "inputType": "slider",
+    "inputProps": {
+      "min": 1,
+      "max": 8,
+      "step": 1
+    }
+  },
+  {
+    "id": "learning_motivation",
+    "text": "Qu'est-ce qui vous motive à apprendre et à améliorer vos compétences en technologie ?",
+    "inputType": "multi",
+    "inputProps": {
+      "order": "default",
+      "min": 1,
+      "max": 5
+    },
+    "responses": [
+      {"id": "career_advancement", "text": "Avancement professionnel"},
+      {"id": "personal_growth", "text": "Développement personnel"},
+      {"id": "passion_for_technology", "text": "Passion pour la technologie"},
+      {"id": "salary_increase", "text": "Augmentation de salaire"},
+      {"id": "job_opportunities", "text": "Opportunités d'emploi"},
+      {"id": "other", "text": "Autre (précisez)"}
+    ]
+  },
+  {
+    "id": "previous_training_satisfaction",
+    "text": "Êtes-vous satisfait(e) de vos formations ou cours précédents liés à la technologie ?",
+    "inputType": "single",
+    "inputProps": {},
+    "responses": [
+      {"id": "very_satisfied", "text": "Très satisfait(e)"},
+      {"id": "satisfied", "text": "Satisfait(e)"},
+      {"id": "neutral", "text": "Neutre"},
+      {"id": "dissatisfied", "text": "Insatisfait(e)"},
+      {"id": "very_dissatisfied", "text": "Très insatisfait(e)"}
+    ]
+  },
+  {
+    "id": "learning_preferences",
+    "text": "Avez-vous des préférences particulières en termes de méthodes d'apprentissage ?",
+    "inputType": "text",
+    "inputProps": {}
+  },
+  {
+    "id": "additional_comments",
+    "text": "Avez-vous d'autres commentaires ou informations que vous souhaitez partager avec nous ?",
+    "inputType": "text",
+    "inputProps": {}
+  }
 ]
