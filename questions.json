@@ -1,15 +1,5 @@
 [
   {
-    "id": "start-your-journey",
-    "text": "Bienvenue ! Êtes-vous prêt(e) à commencer votre parcours d'apprentissage ?",
-    "inputType": "single",
-    "inputProps": {},
-    "responses": [
-      {"id": "yes", "text": "Oui"},
-      {"id": "no", "text": "Non"}
-    ]
-  },
-  {
     "id": "experience",
     "text": "Quel est votre niveau d'expérience en programmation ?",
     "inputType": "single",
