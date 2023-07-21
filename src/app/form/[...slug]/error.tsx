@@ -18,7 +18,8 @@ export default function Error({
     <div>
       <h2>Question not found</h2>
       <p>{error.message}</p>
-      <button onClick={() => reset()}>Retry</button>
+      <a href="#" onClick={() => reset()}>Réessayer</a>
+      <a href="/">Revenir à l'acceuil</a>
     </div>
   )
 }

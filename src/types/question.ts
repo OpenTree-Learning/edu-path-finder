@@ -2,37 +2,57 @@ import { Document } from "mongoose";
 
 
 interface NumericalComparison {
-  type: string,
+  type: string
   value: number
 }
 
 interface Condition {
-  id: string;
+  id: string
   condition: {
-    comparison?: NumericalComparison [],
-    OR?: string [];
-    AND?: string [];
-  };
+    comparison?: NumericalComparison []
+    OR?: string []
+    AND?: string []
+  }
 }
 
 interface NextQuestion {
-  id: string;
+  id: string
   conditions: {
     OR?: Condition [];
     AND?: Condition [];
   };
 }
 
-interface Question extends Document {
-  id: string;
-  text: string;
-  responses: string[];
-  nextQuestions: NextQuestion [];
+export interface Response {
+  id: string
+  text: string
 }
 
-export default Question;
+export interface Question {
+  questionId: string
+  text: string
+  inputType: InputType
+  inputProps: any
+  responses: Response []
+  nextQuestions: NextQuestion []
+}
+
+export interface QuestionDocument extends 
+  Document, 
+  Exclude<Question, 'inputType' | 'inputProps'> 
+{}
+
 
 export interface QuestionResponse {
   messsage: string,
   data: Question []
 }
+
+export type InputType = 'text' 
+  | 'number'
+  | 'email'
+  | 'slider'
+  | 'single'
+  | 'multi'
+  | 'single-suggestion'
+  | 'multi-suggestion'

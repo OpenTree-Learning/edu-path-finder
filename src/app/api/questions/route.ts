@@ -24,6 +24,8 @@ export async function GET () {
     return noDataResponse;
   }
 
+  console.log('Questions fetched on API side:', res)
+
   return NextResponse.json(
     {
       message: 'Questions successfully fetched.',

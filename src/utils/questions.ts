@@ -1,5 +1,5 @@
 import { apiFetch } from "./api_client"
-import Question, { QuestionResponse } from "../types/question"
+import { QuestionResponse } from "../types/question"
 
 
 export async function getQuestions (): Promise<QuestionResponse> {
@@ -11,6 +11,8 @@ export async function getQuestions (): Promise<QuestionResponse> {
       }
     }
   )
+  
+  console.log('Questions fetched on application side:', questions)
 
   return questions
 }

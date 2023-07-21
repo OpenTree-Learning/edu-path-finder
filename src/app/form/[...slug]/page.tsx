@@ -11,11 +11,12 @@ export default async function QuestionPage({ params }: { params: { slug: string 
 
   const [ questionId ] = params.slug
   const questions: types.QuestionResponse = await getQuestions()
-  const question: types.default = questions.data
-    .find((q: types.default) => q.id === questionId) as types.default
+  console.log('questions:', questions.data)
+  const question: types.Question = questions.data
+    .find((q: types.Question) => q.questionId === questionId) as types.Question
 
   if (!question) {
-    throw new Error(`No question ${questionId}`)
+    throw new Error(`La question "${questionId}" n'existe pas.`)
   }
 
   return (

@@ -1,6 +1,6 @@
 [
   {
-    "id": "experience",
+    "questionId": "experience",
     "text": "Quel est votre niveau d'expérience en programmation ?",
     "inputType": "single",
     "inputProps": {},
@@ -21,7 +21,7 @@
     ]
   },
   {
-    "id": "context",
+    "questionId": "context",
     "text": "Quel est votre contexte de formation actuel ?",
     "inputType": "single",
     "inputProps": {},
@@ -42,7 +42,7 @@
     ]
   },
   {
-    "id": "interests",
+    "questionId": "interests",
     "text": "Quels sont les domaines qui vous passionnent dans le domaine de la technologie ?",
     "inputType": "multi",
     "inputProps": {
@@ -72,7 +72,7 @@
     ]
   },
   {
-    "id": "goals",
+    "questionId": "goals",
     "text": "Quels sont vos objectifs personnels ou professionnels pour votre formation ?",
     "inputType": "multi",
     "inputProps": {
@@ -100,7 +100,7 @@
     ]
   },
   {
-    "id": "learning_method",
+    "questionId": "learning_method",
     "text": "Quelle est votre méthode d'apprentissage préférée ?",
     "inputType": "single",
     "inputProps": {},
@@ -124,13 +124,13 @@
     ]
   },
   {
-    "id": "additional_info",
+    "questionId": "additional_info",
     "text": "Avez-vous des informations complémentaires que vous souhaitez partager concernant votre besoin de formation ?",
     "inputType": "text",
     "inputProps": {}
   },
   {
-    "id": "coding_experience",
+    "questionId": "coding_experience",
     "text": "Quelle est votre expérience en programmation ?",
     "inputType": "multi",
     "inputProps": {
@@ -157,7 +157,7 @@
     ]
   },
   {
-    "id": "programming_languages",
+    "questionId": "programming_languages",
     "text": "Quels langages de programmation maîtrisez-vous ou avez-vous l'intention d'apprendre ?",
     "inputType": "multi-suggestion",
     "inputProps": {
@@ -188,7 +188,7 @@
     ]
   },
   {
-    "id": "preferred_learning_style",
+    "questionId": "preferred_learning_style",
     "text": "Quel est votre style d'apprentissage préféré ?",
     "inputType": "single",
     "inputProps": {},
@@ -210,7 +210,7 @@
     ]
   },
   {
-    "id": "time_commitment",
+    "questionId": "time_commitment",
     "text": "Combien de temps êtes-vous prêt(e) à consacrer chaque semaine à votre formation ?",
     "inputType": "slider",
     "inputProps": {
@@ -220,13 +220,13 @@
     }
   },
   {
-    "id": "desired_tech_job",
+    "questionId": "desired_tech_job",
     "text": "Quel poste dans le domaine de la technologie voudriez-vous occuper idéalement ?",
     "inputType": "text",
     "inputProps": {}
   },
   {
-    "id": "previous_training",
+    "questionId": "previous_training",
     "text": "Avez-vous suivi des formations ou des cours liés à la technologie auparavant ?",
     "inputType": "single",
     "inputProps": {},
@@ -254,13 +254,13 @@
     ]
   },
   {
-    "id": "training_details",
+    "questionId": "training_details",
     "text": "Pouvez-vous donner des détails sur les formations ou les cours que vous avez suivis ?",
     "inputType": "text",
     "inputProps": {}
   },
   {
-    "id": "programming_experience",
+    "questionId": "programming_experience",
     "text": "Avez-vous de l'expérience en programmation ?",
     "inputType": "single",
     "inputProps": {},
@@ -288,7 +288,7 @@
     ]
   },
   {
-    "id": "programming_languages_known",
+    "questionId": "programming_languages_known",
     "text": "Quels langages de programmation connaissez-vous ?",
     "inputType": "multi",
     "inputProps": {
@@ -319,7 +319,7 @@
     ]
   },
   {
-    "id": "tech_challenges",
+    "questionId": "tech_challenges",
     "text": "Quels sont les principaux défis ou obstacles que vous rencontrez dans votre parcours technologique ?",
     "inputType": "multi",
     "inputProps": {
@@ -347,7 +347,7 @@
     ]
   },
   {
-    "id": "preferred_learning_resources",
+    "questionId": "preferred_learning_resources",
     "text": "Quels sont vos ressources d'apprentissage préférées ?",
     "inputType": "multi",
     "inputProps": {
@@ -375,7 +375,7 @@
     ]
   },
   {
-    "id": "preferred_learning_time",
+    "questionId": "preferred_learning_time",
     "text": "Quand préférez-vous consacrer du temps à l'apprentissage ?",
     "inputType": "single",
     "inputProps": {},
@@ -398,7 +398,7 @@
     ]
   },
   {
-    "id": "desired_programming_skills",
+    "questionId": "desired_programming_skills",
     "text": "Quelles compétences en programmation souhaitez-vous acquérir ou améliorer ?",
     "inputType": "multi",
     "inputProps": {
@@ -429,7 +429,7 @@
     ]
   },
   {
-    "id": "current_education",
+    "questionId": "current_education",
     "text": "Quel est votre niveau d'éducation actuel ?",
     "inputType": "single",
     "inputProps": {},
@@ -453,7 +453,7 @@
     ]
   },
   {
-    "id": "current_employment",
+    "questionId": "current_employment",
     "text": "Êtes-vous actuellement employé(e) ?",
     "inputType": "single",
     "inputProps": {},
@@ -484,19 +484,19 @@
     ]
   },
   {
-    "id": "employment_field",
+    "questionId": "employment_field",
     "text": "Dans quel domaine travaillez-vous actuellement ?",
     "inputType": "text",
     "inputProps": {}
   },
   {
-    "id": "learning_objective",
+    "questionId": "learning_objective",
     "text": "Quel est votre principal objectif d'apprentissage pour cette formation ?",
     "inputType": "text",
     "inputProps": {}
   },
   {
-    "id": "preferred_learning_environment",
+    "questionId": "preferred_learning_environment",
     "text": "Préférez-vous apprendre de manière autonome ou en groupe ?",
     "inputType": "single",
     "inputProps": {},
@@ -507,7 +507,7 @@
     ]
   },
   {
-    "id": "preferred_learning_duration",
+    "questionId": "preferred_learning_duration",
     "text": "Combien de temps souhaitez-vous consacrer à votre formation chaque jour ?",
     "inputType": "slider",
     "inputProps": {
@@ -517,7 +517,7 @@
     }
   },
   {
-    "id": "learning_motivation",
+    "questionId": "learning_motivation",
     "text": "Qu'est-ce qui vous motive à apprendre et à améliorer vos compétences en technologie ?",
     "inputType": "multi",
     "inputProps": {
@@ -535,7 +535,7 @@
     ]
   },
   {
-    "id": "previous_training_satisfaction",
+    "questionId": "previous_training_satisfaction",
     "text": "Êtes-vous satisfait(e) de vos formations ou cours précédents liés à la technologie ?",
     "inputType": "single",
     "inputProps": {},
@@ -548,13 +548,13 @@
     ]
   },
   {
-    "id": "learning_preferences",
+    "questionId": "learning_preferences",
     "text": "Avez-vous des préférences particulières en termes de méthodes d'apprentissage ?",
     "inputType": "text",
     "inputProps": {}
   },
   {
-    "id": "additional_comments",
+    "questionId": "additional_comments",
     "text": "Avez-vous d'autres commentaires ou informations que vous souhaitez partager avec nous ?",
     "inputType": "text",
     "inputProps": {}

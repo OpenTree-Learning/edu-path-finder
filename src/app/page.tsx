@@ -14,7 +14,7 @@ export default async function Home() {
         <p>Who knows maybe your more intersted in a different career?</p>
       </div>
       <div>
-        <Link href='/form/start-your-journey'>Start your journey!</Link>
+        <Link href='/form/experience'>Start your journey!</Link>
       </div>
     </div>
   );
