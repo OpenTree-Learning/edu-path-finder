@@ -1,4 +1,3 @@
-import { ReactElement } from 'react'
 import { Question, InputType } from '../../../../types/question'
 import inputTypeComponentMap from './question-input-map'
 

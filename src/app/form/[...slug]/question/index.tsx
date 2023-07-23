@@ -1,10 +1,12 @@
 'use client'
 
 
-import { Question } from "../../../../types/question"
-import QuestionInput from "./question-input"
-import { Form, Formik, FormikProps } from 'formik'
+import { Question } from '../../../../types/question'
+import QuestionInput from './question-input'
+import { Form, Formik } from 'formik'
 
+import { pushResponse } from '../../../../store/features/responses'
+import { useAppDispatch  } from '../../../../store/hooks'
 
 //
 //
@@ -32,17 +34,28 @@ export default function Question(
   const { questionId, text, responses, nextQuestions } = question
   const initialResponse = { response: responses[0].id || '' }
 
+  const dispatch = useAppDispatch()
+
+
+  function handleQuestionSubmit (e: any) {
+    const responseId = e.target.value
+
+    dispatch(pushResponse({
+      id: responseId,
+      questionId: questionId
+    }))
+  }
+
   return (
     <div className="questionLayout" id={ `question_${questionId}` }>
       <h2>{ text }</h2>
       <Formik
         initialValues={initialResponse}
-        handleChange={(e: any) => console.log(e)}
         onSubmit={(values, actions) => {
           console.log({values, actions})
         }}
       >
-        <Form>
+        <Form onChange={handleQuestionSubmit}>
           <QuestionInput question={question}/>
         </Form>
       </Formik>

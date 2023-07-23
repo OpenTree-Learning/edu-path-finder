@@ -21,15 +21,15 @@ function SingleSuggestionInput (props: SingleSuggestionInputProps) {
     setInputValue(value)
   }
 
-  const handleResponseClick = (Response: Response) => {
-    setSelectedResponse(Response)
-    setInputValue(Response.text)
+  const handleResponseClick = (response: Response) => {
+    setSelectedResponse(response)
+    setInputValue(response.text)
   }
 
   const handleInputKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter') {
-      const matchingResponse = responses.find((Response) =>
-        Response.text.toLowerCase() === inputValue.toLowerCase()
+      const matchingResponse = responses.find((response) =>
+        response.text.toLowerCase() === inputValue.toLowerCase()
       )
 
       if (matchingResponse) {
@@ -39,8 +39,8 @@ function SingleSuggestionInput (props: SingleSuggestionInputProps) {
     }
   }
 
-  const filteredResponses = responses.filter((Response) =>
-    Response.text.toLowerCase().startsWith(inputValue.toLowerCase())
+  const filteredResponses = responses.filter((response) =>
+    response.text.toLowerCase().startsWith(inputValue.toLowerCase())
   )
 
   return (

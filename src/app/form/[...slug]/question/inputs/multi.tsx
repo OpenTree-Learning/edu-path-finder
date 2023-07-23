@@ -8,17 +8,19 @@ import { Response } from '../../../../../types/question'
 export default function Multi (props: any) {
   const responses: Response [] = props.responses as Response []
 
-  return responses.map((response: Response, idx: number) => (
+  return (
     <div role="group" aria-labelledby="checkbox-group">
-      <label key={idx}>
-        <Field
-          type="checkbox"
-          id={response.id}
-          name={response.id}
-          value={response.id}
-        />
-        { response.text }
-      </label>
+      {responses.map((response: Response, idx: number) => (
+        <label key={idx}>
+          <Field
+            type="checkbox"
+            id={response.id}
+            name="response"
+            value={response.id}
+          />
+          { response.text }
+        </label>
+      ))}
     </div>
-  ))
+  )
 }

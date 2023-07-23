@@ -1,3 +1,6 @@
+import { AppProvider } from '../store/provider'
+
+
 export default function RootLayout({
   children
 }: {
@@ -6,7 +9,9 @@ export default function RootLayout({
   return (
     <html>
       <body>
-        { children }
+        <AppProvider>
+          { children }
+        </AppProvider>
       </body>
     </html>
   )

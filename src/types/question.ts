@@ -56,3 +56,11 @@ export type InputType = 'text'
   | 'multi'
   | 'single-suggestion'
   | 'multi-suggestion'
+
+
+export interface SubmitedResponse {
+  id: string
+  questionId: string
+}
+
+export type ResponseHistory = SubmitedResponse []
