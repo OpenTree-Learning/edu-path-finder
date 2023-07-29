@@ -1,12 +1,16 @@
 'use client'
 
+import { useSelector } from 'react-redux'
+import { useEffect } from 'react'
+import { useRouter } from 'next/navigation'
 
 import { Question } from '../../../../types/question'
 import QuestionInput from './question-input'
 import { Form, Formik } from 'formik'
 
-import { pushResponse } from '../../../../store/features/responses'
-import { useAppDispatch  } from '../../../../store/hooks'
+import { pushResponse, setCurrentQuestion } from '../../../../store/features/responses'
+import { useAppDispatch, useAppSelector  } from '../../../../store/hooks'
+import { ResponsesState } from '../../../../store/features/responses'
 
 //
 //
@@ -31,14 +35,28 @@ export interface QuestionProps {
 export default function Question(
   { question }: QuestionProps
 ) {
+  const router = useRouter()
+
   const { questionId, text, responses, nextQuestions } = question
   const initialResponse = { response: responses[0].id || '' }
 
+  const currentQuestion = useAppSelector((state: any) => state.persistedReducer.currentQuestion)
   const dispatch = useAppDispatch()
+
+
+  useEffect(() => {
+    if (!currentQuestion) {
+      dispatch(setCurrentQuestion('context'))
+      return
+    }
+    router.push(currentQuestion)
+  }, [])
 
 
   function handleQuestionSubmit (e: any) {
     const responseId = e.target.value
+
+    console.log('Current question:', currentQuestion)
 
     dispatch(pushResponse({
       id: responseId,

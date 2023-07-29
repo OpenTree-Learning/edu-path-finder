@@ -3,6 +3,7 @@ import { preloadQuestions } from './form/[...slug]/page';
 
 
 export default async function Home() {
+
   preloadQuestions()
 
   return (

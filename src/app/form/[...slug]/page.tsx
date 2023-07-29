@@ -11,7 +11,6 @@ export default async function QuestionPage({ params }: { params: { slug: string 
 
   const [ questionId ] = params.slug
   const questions: types.QuestionResponse = await getQuestions()
-  console.log('questions:', questions.data)
   const question: types.Question = questions.data
     .find((q: types.Question) => q.questionId === questionId) as types.Question
 

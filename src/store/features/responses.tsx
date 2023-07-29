@@ -2,12 +2,14 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { ResponseHistory, SubmitedResponse } from '../../types/question'
 
 
-interface ResponsesState {
+export interface ResponsesState {
   history: ResponseHistory
+  currentQuestion: string
 }
 
 const initialState: ResponsesState = {
-  history: []
+  history: [],
+  currentQuestion: ''
 }
 
 export const questions = createSlice({
@@ -17,13 +19,17 @@ export const questions = createSlice({
     reset: () => initialState,
     pushResponse: (state, action: PayloadAction<SubmitedResponse>) => {
       state.history.push(action.payload)
+    },
+    setCurrentQuestion: (state, action: PayloadAction<string>) => {
+      state.currentQuestion = action.payload
     }
   }
 })
 
 export const {
   reset,
-  pushResponse
+  pushResponse,
+  setCurrentQuestion
 } = questions.actions
 
 export default questions.reducer
