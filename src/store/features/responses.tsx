@@ -1,15 +1,18 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { ResponseHistory, SubmitedResponse } from '../../types/question'
+import { ResponseHistory, SubmitedResponse, Question } from '../../types/question'
+import computeNextQuestion, { getQuestionFromId } from '../../utils/logic/compute_next_question'
 
 
 export interface ResponsesState {
   history: ResponseHistory
-  currentQuestion: string
+  currentQuestion: string,
+  questions: Question []
 }
 
 const initialState: ResponsesState = {
   history: [],
-  currentQuestion: ''
+  currentQuestion: 'experience',
+  questions: []
 }
 
 export const questions = createSlice({
@@ -17,19 +20,29 @@ export const questions = createSlice({
   initialState,
   reducers: {
     reset: () => initialState,
-    pushResponse: (state, action: PayloadAction<SubmitedResponse>) => {
-      state.history.push(action.payload)
+    saveQuestions: (state: ResponsesState, action: PayloadAction<Question []>) => {
+      state.questions = action.payload
     },
-    setCurrentQuestion: (state, action: PayloadAction<string>) => {
-      state.currentQuestion = action.payload
+    goToNextQuestion: (state: ResponsesState, action: PayloadAction<string []>) => {
+      const currentQuestion = getQuestionFromId(state.currentQuestion, state.questions)
+
+      state.history.push({
+        ids: action.payload,
+        questionId: state.currentQuestion
+      })
+      state.currentQuestion = computeNextQuestion(
+        state.history,
+        currentQuestion,
+        state.questions
+      )
     }
   }
 })
 
 export const {
   reset,
-  pushResponse,
-  setCurrentQuestion
+  saveQuestions,
+  goToNextQuestion
 } = questions.actions
 
 export default questions.reducer

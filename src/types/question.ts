@@ -1,12 +1,39 @@
 import { Document } from "mongoose";
 
 
-interface NumericalComparison {
-  type: string
+export type QuestionConditions = string [] | NumericalComparison []
+
+// TODO: Rename that type
+export type ProcessResponsesOperator = (questionId: string, conditions: QuestionConditions, history: ResponseHistory) => boolean
+export type ProcessNumericalResponseOperator = (questionId: string, conditions: QuestionConditions, history: ResponseHistory) => boolean
+
+export type ProcessPossibleQuestionOperator = (responses: boolean [], history: ResponseHistory) => boolean
+
+export interface ProcessPossibleQuestion {
+  AND: ProcessPossibleQuestionOperator,
+  OR: ProcessPossibleQuestionOperator
+}
+
+export interface ProcessResponses {
+  AND: ProcessResponsesOperator,
+  OR: ProcessResponsesOperator,
+  comparison: ProcessNumericalResponseOperator
+}
+
+
+export type ComparisonOperator = '=' 
+  | '!='
+  | '>='
+  | '<='
+export type ConditionsOperator = 'AND' | 'OR'
+export type ConditionOperator = ConditionsOperator | 'comparison'
+
+export interface NumericalComparison {
+  type: ComparisonOperator
   value: number
 }
 
-interface Condition {
+export interface Condition {
   id: string
   condition: {
     comparison?: NumericalComparison []
@@ -15,7 +42,7 @@ interface Condition {
   }
 }
 
-interface NextQuestion {
+export interface NextQuestion {
   id: string
   conditions: {
     OR?: Condition [];
@@ -59,7 +86,7 @@ export type InputType = 'text'
 
 
 export interface SubmitedResponse {
-  id: string
+  ids: string []
   questionId: string
 }
 

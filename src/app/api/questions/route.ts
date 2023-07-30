@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server'
 
 import Question from '../../../models/question'
-import connectDB from '../../../utils/db'
+import connectDB from '../../../utils/db/db'
 
 
 export async function GET () {
@@ -23,8 +23,6 @@ export async function GET () {
   if (!res) {
     return noDataResponse;
   }
-
-  console.log('Questions fetched on API side:', res)
 
   return NextResponse.json(
     {

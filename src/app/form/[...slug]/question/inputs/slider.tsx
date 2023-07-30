@@ -3,7 +3,7 @@
 
 import { Field } from 'formik'
 import { useState } from 'react'
-import { copyAndDelete } from '../../../../../utils/utils'
+import { copyAndDelete } from '../../../../../utils/helpers/object' 
 
 
 interface SliderInputProps {

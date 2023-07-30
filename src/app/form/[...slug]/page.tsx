@@ -1,4 +1,4 @@
-import { getQuestions } from '../../../utils/questions'
+import { getQuestions } from '../../../utils/api/questions'
 import Question from './question'
 import * as types from '../../../types/question'
 
@@ -13,12 +13,12 @@ export default async function QuestionPage({ params }: { params: { slug: string 
   const questions: types.QuestionResponse = await getQuestions()
   const question: types.Question = questions.data
     .find((q: types.Question) => q.questionId === questionId) as types.Question
-
+  
   if (!question) {
     throw new Error(`La question "${questionId}" n'existe pas.`)
   }
 
   return (
-    <Question question={question}/>
+    <Question question={question} loadedQuestions={questions.data}/>
   )
 }

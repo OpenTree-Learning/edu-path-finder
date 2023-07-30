@@ -1,16 +1,16 @@
 'use client'
 
 import { useSelector } from 'react-redux'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 
 import { Question } from '../../../../types/question'
 import QuestionInput from './question-input'
 import { Form, Formik } from 'formik'
 
-import { pushResponse, setCurrentQuestion } from '../../../../store/features/responses'
+import { ResponsesState, goToNextQuestion, saveQuestions } from '../../../../store/features/responses'
 import { useAppDispatch, useAppSelector  } from '../../../../store/hooks'
-import { ResponsesState } from '../../../../store/features/responses'
+import computeNextQuestion, { getQuestionFromId } from '../../../../utils/logic/compute_next_question'
 
 //
 //
@@ -29,11 +29,12 @@ import { ResponsesState } from '../../../../store/features/responses'
 
 
 export interface QuestionProps {
-  question: Question
+  question: Question,
+  loadedQuestions: Question []
 }
 
 export default function Question(
-  { question }: QuestionProps
+  { question, loadedQuestions }: QuestionProps
 ) {
   const router = useRouter()
 
@@ -41,27 +42,28 @@ export default function Question(
   const initialResponse = { response: responses[0].id || '' }
 
   const currentQuestion = useAppSelector((state: any) => state.persistedReducer.currentQuestion)
+  const questions = useAppSelector((state: any) => state.persistedReducer.questions)
   const dispatch = useAppDispatch()
 
 
   useEffect(() => {
-    if (!currentQuestion) {
-      dispatch(setCurrentQuestion('context'))
-      return
+    if (questions.length === 0) {
+      dispatch(saveQuestions(loadedQuestions))
     }
+  }, [dispatch])
+
+
+  useEffect(() => {
     router.push(currentQuestion)
-  }, [])
+  }, [currentQuestion])
 
 
   function handleQuestionSubmit (e: any) {
     const responseId = e.target.value
 
-    console.log('Current question:', currentQuestion)
+    // TODO: Use a Formik hook to mount the data of the input in an array of responses.
 
-    dispatch(pushResponse({
-      id: responseId,
-      questionId: questionId
-    }))
+    dispatch(goToNextQuestion([responseId]))
   }
 
   return (
