@@ -11,7 +11,7 @@ mongoose.connect(MONGO_URI)
   .then(() => console.log('Successfully connected to MongoDB'))
   .catch((error) => console.error('Connection error', error));
 
-const questionsFilePath = path.resolve(__dirname, './questions.json');
+const questionsFilePath = path.resolve(__dirname, './questions_test.json');
 const questionsJson = fs.readFileSync(questionsFilePath, 'utf8');
 const questions = JSON.parse(questionsJson);
 

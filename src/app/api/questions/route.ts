@@ -24,6 +24,9 @@ export async function GET () {
     return noDataResponse;
   }
 
+
+  console.log(res)
+
   return NextResponse.json(
     {
       message: 'Questions successfully fetched.',

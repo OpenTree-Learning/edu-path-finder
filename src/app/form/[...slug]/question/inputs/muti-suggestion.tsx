@@ -1,16 +1,24 @@
 'use client'
 
 
-import { Field } from 'formik'
+import { Field, useFormikContext } from 'formik'
 import React, { useState } from 'react'
 import { Response } from '../../../../../types/question'
 
 
 interface MultiSuggestionInputProps {
-  responses: Response []
+  responses: Response [],
+  questionId: string
 }
 
+
+//
+// TODO: Upgrade this component: there is now way to delete an item.
+//
+
 function MultiSuggestionInput (props: MultiSuggestionInputProps) {
+
+  const { setFieldValue, submitForm } = useFormikContext()
 
   const [inputValue, setInputValue] = useState('')
   const [responses, setResponses] = useState<Response[]>(props.responses)
@@ -18,6 +26,7 @@ function MultiSuggestionInput (props: MultiSuggestionInputProps) {
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value
+
     setInputValue(value)
   }
 
@@ -46,6 +55,15 @@ function MultiSuggestionInput (props: MultiSuggestionInputProps) {
     if (event.key === 'Enter') {
       setInputValue('')
     }
+  }
+
+  const handleSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
+    setFieldValue('response', {
+      ids: selectedResponses.map((r: Response) => r.id),
+      questionId: props.questionId
+    })
+    submitForm()
+    e.stopPropagation()
   }
 
   const filteredResponses = responses.filter(
@@ -80,10 +98,13 @@ function MultiSuggestionInput (props: MultiSuggestionInputProps) {
         ))}
       </ul>
       {selectedResponses.length > 0 && (
-        <p>
-          Selected Responses:{' '}
-          {selectedResponses.map((selectedResponse) => selectedResponse.text).join(', ')}
-        </p>
+        <>
+          <p>
+            Selected Responses:{' '}
+            {selectedResponses.map((selectedResponse) => selectedResponse.text).join(', ')}
+          </p>
+          <button onClick={handleSubmit}>Submit</button>
+        </>
       )}
     </div>
   )
@@ -92,11 +113,8 @@ function MultiSuggestionInput (props: MultiSuggestionInputProps) {
 export default function MultiSuggestion (props: any) {
   const responses: Response [] = props.responses as Response []
 
-  return <Field
-    type="multi-suggestion"
-    id="response"
-    name="response"
-    inputProps={{responses: responses}}
-    component={MultiSuggestionInput}
-  />
+  return <MultiSuggestionInput
+            responses={responses}
+            questionId={props.questionId}
+          />
 }

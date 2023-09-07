@@ -1,3 +1,5 @@
+// TODO: Split this file
+
 import { Document } from "mongoose";
 
 
@@ -75,19 +77,30 @@ export interface QuestionResponse {
   data: Question []
 }
 
-export type InputType = 'text' 
-  | 'number'
-  | 'email'
-  | 'slider'
-  | 'single'
-  | 'multi'
-  | 'single-suggestion'
-  | 'multi-suggestion'
+
+export const numericalInputType = ['number', 'slider']
+export const isNumericalInputType = (type: string) => numericalInputType.includes(type)
+
+export const stringInputType = ['text', 'email', 'single', 'single-suggestion']
+export const isStringInputType = (type: string) => stringInputType.includes(type)
+
+export const arrayinputType = ['multi', 'multi-suggestion']
+export const isArrayInputType = (type: string) => arrayinputType.includes(type)
+
+
+export type NumericalInputType = typeof numericalInputType[number]
+
+export type StringInputType = typeof stringInputType[number]
+
+export type ArrayInputType = typeof arrayinputType[number]
+
+export type InputType = NumericalInputType | StringInputType | ArrayInputType
 
 
 export interface SubmitedResponse {
   ids: string []
   questionId: string
 }
+
 
 export type ResponseHistory = SubmitedResponse []

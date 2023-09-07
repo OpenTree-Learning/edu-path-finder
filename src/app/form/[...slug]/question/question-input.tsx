@@ -9,8 +9,8 @@ interface QuestionInputProps {
 export default function QuestionInput ({
   question
 }: QuestionInputProps) {
-  const { responses, inputType, inputProps } = question
+  const { questionId, responses, inputType, inputProps } = question
   const Input: React.ComponentType<any> = inputTypeComponentMap[inputType]
 
-  return <Input responses={responses} {...inputProps} />
+  return <Input questionId={questionId} responses={responses} {...inputProps} />
 }

@@ -1,3 +1,6 @@
+'use client'
+
+
 import {
   ResponseHistory,
   Question,
@@ -22,6 +25,16 @@ function processResponsesLogical(
 ): boolean
 {
   const submittedResponse = history.find((response: SubmitedResponse) => response.questionId === questionId)
+  //
+  // TODO: Fix this bug:
+  //
+  // "TypeError: Cannot read properties of undefined (reading 'ids')"
+  //
+  // Reason: The slider on conding_experience question still emit onChange event
+  //         when next question is loaded. As the next question a question id as input
+  //         and not a numerical value as the slider sends.
+  //         This it throws the error above.
+  //
   const submittedResponses = (submittedResponse as SubmitedResponse).ids as string []
   const isResponseIncluded = ((response: string) => submittedResponses.includes(response))
 
@@ -38,6 +51,7 @@ function processResponsesNumerical(
   history: ResponseHistory,
 ): boolean
 {
+  // TODO: Make sure this function works (need to test with comparison condition).
   const submittedResponse = history.find((response: SubmitedResponse) => response.questionId === questionId)
   const submittedValue = Number(submittedResponse?.ids[0]) as number
   const processComparison = {
@@ -95,6 +109,11 @@ function getQuestionResponses(
 ): string []
 {
   const question: Question = getQuestionFromId(questionId, questions)
+  
+  //
+  // TODO: Fix the issue at this line:
+  // TypeError: Cannot read properties of undefined (reading 'responses')
+  //
 
   return question.responses.map((response: Response) => response.id)
 }
@@ -148,7 +167,7 @@ export default function computeNextQuestion (
      * 
      *    - conditions: The array of conditions that is stored in a 'AND' or 'OR' field.
      * 
-     *    - results: For each condition of the array of conditions, true value is pused if the condition 
+     *    - results: For each condition of the array of conditions, true value is pushed if the condition 
      *               is validated, false otherwise.
      * 
      */
@@ -197,6 +216,8 @@ export default function computeNextQuestion (
        *    false otherwise.
        * 
        */
+      console.log('Next possible question:', questionId)
+      console.log('Next question?', processResponseResult)
       results.push(processResponseResult)
     }
 
