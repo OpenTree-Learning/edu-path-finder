@@ -1,16 +1,18 @@
 'use client'
 
 import { useSelector } from 'react-redux'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 
-import { Question } from '../../../../types/question'
+import { isStringInputType, isNumericalInputType, isArrayInputType, SubmitedResponse } from '../../../../types/question'
+import { Question as QuestionType } from '../../../../types/question'
 import QuestionInput from './question-input'
 import { Form, Formik } from 'formik'
 
-import { pushResponse, setCurrentQuestion } from '../../../../store/features/responses'
+import { ResponsesState, goToNextQuestion, saveQuestions, reset } from '../../../../store/features/responses'
 import { useAppDispatch, useAppSelector  } from '../../../../store/hooks'
-import { ResponsesState } from '../../../../store/features/responses'
+import computeNextQuestion, { getQuestionFromId } from '../../../../utils/logic/compute_next_question'
+import { displayPartsToString } from 'typescript'
 
 //
 //
@@ -29,51 +31,72 @@ import { ResponsesState } from '../../../../store/features/responses'
 
 
 export interface QuestionProps {
-  question: Question
+  question: QuestionType,
+  loadedQuestions: QuestionType []
 }
 
 export default function Question(
-  { question }: QuestionProps
+  { question, loadedQuestions }: QuestionProps
 ) {
   const router = useRouter()
+  const dispatch = useAppDispatch()
 
-  const { questionId, text, responses, nextQuestions } = question
-  const initialResponse = { response: responses[0].id || '' }
+  const handleRestart = () => {
+    dispatch(reset())
+    router.push('/')
+  }
+
+  if (!question) {
+    return (
+      <div style={{textAlign: 'center'}}>
+        <h2>End of the form!</h2>
+        <h3>Thanks for answering all the question!</h3>
+        <h3>We're working on building your best learning path!</h3>
+        <button onClick={handleRestart}>Restart form</button>
+      </div>
+    )
+  }
+
+  const { questionId, text, inputType, inputProps, responses, nextQuestions } = question
+  const initialValueMap = [
+    [isStringInputType(inputType), inputProps?.defaultValue || responses[0]?.id || ''],
+    [isNumericalInputType(inputType), inputProps?.defaultValue || inputProps?.min || 0],
+    [isArrayInputType(inputType), inputProps?.defaultValues || [responses[0]?.id] || []]
+  ]
+  const initialValue = initialValueMap.find((value: any []) => value[0]) as any []
+  const initialValues = { response: initialValue[1] }
 
   const currentQuestion = useAppSelector((state: any) => state.persistedReducer.currentQuestion)
-  const dispatch = useAppDispatch()
+  const questions = useAppSelector((state: any) => state.persistedReducer.questions)
 
 
   useEffect(() => {
-    if (!currentQuestion) {
-      dispatch(setCurrentQuestion('context'))
-      return
+    if (questions.length === 0) {
+      dispatch(saveQuestions(loadedQuestions))
     }
+  }, [dispatch])
+
+
+  useEffect(() => {
     router.push(currentQuestion)
-  }, [])
+  }, [currentQuestion])
 
 
-  function handleQuestionSubmit (e: any) {
-    const responseId = e.target.value
+  function handleQuestionSubmit (response: SubmitedResponse) {
+    console.log('SUBMIT IS TRIGERED!!', {response})
 
-    console.log('Current question:', currentQuestion)
-
-    dispatch(pushResponse({
-      id: responseId,
-      questionId: questionId
-    }))
+    // TODO: Receive currentQuestion from the input event.
+    dispatch(goToNextQuestion(response))
   }
 
   return (
     <div className="questionLayout" id={ `question_${questionId}` }>
       <h2>{ text }</h2>
       <Formik
-        initialValues={initialResponse}
-        onSubmit={(values, actions) => {
-          console.log({values, actions})
-        }}
+        initialValues={initialValues}
+        onSubmit={(values) => handleQuestionSubmit(values.response)}
       >
-        <Form onChange={handleQuestionSubmit}>
+        <Form>
           <QuestionInput question={question}/>
         </Form>
       </Formik>

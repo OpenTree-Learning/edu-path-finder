@@ -1,32 +1,92 @@
 'use client'
 
 
-import { Field } from 'formik'
+import { Field, useField, useFormikContext } from 'formik'
 import { useState } from 'react'
-import { copyAndDelete } from '../../../../../utils/utils'
+import { copyAndDelete } from '../../../../../utils/helpers/object' 
 
 
-interface SliderInputProps {
+//const NewInput = (props) => {
+//  const setRef = useCallback((el) => {
+//    el.onchange = props.onChange || null;
+//  }, [props.onChange]);
+//  return <input ref={setRef} {...props} />
+//}
+
+interface SliderProps {
   min: number
   max: number
   step: number
-  inputProps: any
+}
+
+
+interface SliderWrapperProps extends SliderProps {
+  value: number,
+  onChange: (e: Event) => any
+}
+
+//function SliderWrapper ({
+//  min,
+//  max, 
+//  step,
+//  value,
+//  inputProps,
+//  onChange
+//}: SliderWrapperProps) {
+//
+//  const setRef = useCallback((element: HTMLElement | null) => {
+//    if (element) {
+//      element.onmouseup = onChange || null
+//    }
+//  }, [onChange])
+//
+//  return <input
+//    ref={setRef}
+//    type="range"
+//    min={min}
+//    max={max}
+//    step={step}
+//    value={value}
+//    {...inputProps}
+//  />
+//}
+
+
+interface SliderInputProps extends SliderProps {
+  defaultValue: number
+  questionId: string
 }
 
 function SliderInput ({ 
   min,
   max, 
   step,
-  inputProps
+  defaultValue,
+  questionId
 }: SliderInputProps
 ) {
-  const [value, setValue] = useState(min)
+  const [value, setValue] = useState(defaultValue)
+  const { setFieldValue, submitForm } = useFormikContext()
 
-  function handleChange (e: any) {
+  function parseInput (e: any): number {
     const value: string = e?.target?.value as string
     const parsedValue: number = Number(value) as number
 
-    setValue(parsedValue)
+    return parsedValue
+  }
+
+  function handleChange (e: any) {
+    setValue(parseInput(e))
+    e.stopPropagation()
+  }
+
+  function handleMouseUp (e: any) {
+    console.log('REALEASING MOUSE')
+    setFieldValue('response', {
+      ids: [parseInput(e)],
+      questionId: questionId
+    })
+    submitForm()
   }
 
   return (
@@ -38,8 +98,18 @@ function SliderInput ({
         step={step}
         value={value}
         onChange={handleChange}
-        {...inputProps}
+        onMouseUp={handleMouseUp}
       />
+      {/*
+      <SliderWrapper
+        min={min}
+        max={max}
+        step={step}
+        value={value}
+        inputProps={inputProps}
+        onChange={handleChange}
+      />
+      */}
       <p>{ value }</p>
     </div>
   )
@@ -47,15 +117,13 @@ function SliderInput ({
 
 
 export default function Slider (props: any) {
-  const sliderProps = { ...props }
-  const { min, max, step } = copyAndDelete(sliderProps, ['min', 'max', 'step'])
-  const inputProps = { min, max, step, inputProps: sliderProps }
+  const { min, max, step, defaultValue, questionId } = props
 
-  return <Field
-    type="slider"
-    id="response"
-    name="response"
-    inputProps={inputProps} 
-    component={SliderInput}
+  return <SliderInput
+    min={min}
+    max={max}
+    step={step}
+    defaultValue={defaultValue}
+    questionId={questionId}
   />
 }

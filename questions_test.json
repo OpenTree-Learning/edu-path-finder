@@ -1,0 +1,159 @@
+[
+  {
+    "questionId": "experience",
+    "text": "Quel est votre niveau d'expérience en programmation ?",
+    "inputType": "single",
+    "inputProps": {
+      "defaultValue": "beginner"
+    },
+    "responses": [
+      {"id": "beginner", "text": "Débutant(e)"},
+      {"id": "intermediate", "text": "Intermédiaire"},
+      {"id": "advanced", "text": "Avancé(e)"}
+    ],
+    "nextQuestions": [
+      {
+        "id": "coding_experience",
+        "conditions": {
+          "AND": [
+            {"id": "experience", "condition": {"OR": ["beginner", "intermediate", "advanced"]}}
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "questionId": "coding_experience",
+    "text": "Depuis combien de temps faites-vous de la programmation ?",
+    "inputType": "slider",
+    "inputProps": {
+        "min": 0,
+        "max": 20,
+        "defaultValue": 0
+    },
+    "responses": [],
+    "nextQuestions": [
+        {
+            "id": "junior_developer",
+            "conditions": {
+                "AND": [
+                    {
+                        "id": "coding_experience", 
+                        "condition": {
+                            "comparison": [
+                                {
+                                    "type": ">=",
+                                    "value": 0
+                                },
+                                {
+                                    "type": "<=",
+                                    "value": 8
+                                }
+                            ]
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "id": "experienced_developer",
+            "conditions": {
+                "AND": [
+                    {
+                        "id": "coding_experience", 
+                        "condition": {
+                            "comparison": [
+                                {
+                                    "type": ">=",
+                                    "value": 9
+                                },
+                                {
+                                    "type": "<=",
+                                    "value": 20
+                                }
+                            ]
+                        }
+                    }
+                ]
+            }
+        }
+    ]
+  },
+  {
+    "questionId": "experienced_developer",
+    "text": "Quelles compétences en programmation souhaitez-vous améliorer ?",
+    "inputType": "multi",
+    "inputProps": {
+      "defaultValues": [],
+      "order": "default",
+      "min": 1,
+      "max": 5
+    },
+    "responses": [
+      {"id": "frontend_dev", "text": "Développement frontend"},
+      {"id": "backend_dev", "text": "Développement backend"},
+      {"id": "fullstack_dev", "text": "Développement full-stack"},
+      {"id": "database_management", "text": "Gestion de bases de données"},
+      {"id": "software_engineering", "text": "Génie logiciel"},
+      {"id": "mobile_app_dev", "text": "Développement d'applications mobiles"},
+      {"id": "data_analysis", "text": "Analyse de données"},
+      {"id": "cybersecurity", "text": "Cybersécurité"},
+      {"id": "other", "text": "Autre (précisez)"}
+    ],
+    "nextQuestions": [
+      {
+        "id": "preferred_learning_style",
+        "conditions": {
+          "AND": [
+            {"id": "experienced_developer", "condition": {"OR": ["frontend_dev", "backend_dev", "fullstack_dev", "mobile_app_dev"]}}
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "questionId": "junior_developer",
+    "text": "Quels langages de programmation maîtrisez-vous ou avez-vous l'intention d'apprendre ?",
+    "inputType": "multi-suggestion",
+    "inputProps": {
+      "defaultValues": [],
+      "order": "random",
+      "min": 1,
+      "max": 5
+    },
+    "responses": [
+      {"id": "javascript", "text": "JavaScript"},
+      {"id": "python", "text": "Python"},
+      {"id": "java", "text": "Java"},
+      {"id": "csharp", "text": "C#"},
+      {"id": "ruby", "text": "Ruby"},
+      {"id": "php", "text": "PHP"},
+      {"id": "go", "text": "Go"},
+      {"id": "rust", "text": "Rust"},
+      {"id": "other", "text": "Autre (précisez)"}
+    ],
+    "nextQuestions": [
+      {
+        "id": "preferred_learning_style",
+        "conditions": {
+          "AND": [
+            {"id": "programming_languages", "condition": {"OR": ["javascript", "python", "java", "csharp", "ruby"]}}
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "questionId": "preferred_learning_style",
+    "text": "Quel est votre style d'apprentissage préféré ?",
+    "inputType": "single",
+    "inputProps": {},
+    "responses": [
+      {"id": "visual", "text": "Visuel"},
+      {"id": "auditory", "text": "Auditif"},
+      {"id": "read_write", "text": "Lecture/écriture"},
+      {"id": "kinesthetic", "text": "Kinesthésique"}
+    ],
+    "nextQuestions": []
+  }
+]

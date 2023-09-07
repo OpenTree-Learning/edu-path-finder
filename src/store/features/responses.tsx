@@ -1,15 +1,19 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { ResponseHistory, SubmitedResponse } from '../../types/question'
+import { ResponseHistory, SubmitedResponse, Question, NextQuestion } from '../../types/question'
+import computeNextQuestion, { getQuestionFromId } from '../../utils/logic/compute_next_question'
+import { ACTION_PREFETCH } from 'next/dist/client/components/router-reducer/router-reducer-types'
 
 
 export interface ResponsesState {
   history: ResponseHistory
-  currentQuestion: string
+  currentQuestion: string,
+  questions: Question []
 }
 
 const initialState: ResponsesState = {
   history: [],
-  currentQuestion: ''
+  currentQuestion: 'experience',
+  questions: []
 }
 
 export const questions = createSlice({
@@ -17,19 +21,48 @@ export const questions = createSlice({
   initialState,
   reducers: {
     reset: () => initialState,
-    pushResponse: (state, action: PayloadAction<SubmitedResponse>) => {
-      state.history.push(action.payload)
+    saveQuestions: (state: ResponsesState, action: PayloadAction<Question []>) => {
+      state.questions = action.payload
     },
-    setCurrentQuestion: (state, action: PayloadAction<string>) => {
-      state.currentQuestion = action.payload
+    goToNextQuestion: (state: ResponsesState, action: PayloadAction<SubmitedResponse>) => {
+      const { questionId } = action.payload
+
+      if (state.history.find((r: SubmitedResponse) => r.questionId === questionId)) {
+        return
+      }
+
+      const currentQuestion = getQuestionFromId(state.currentQuestion, state.questions)
+      const isLastQuestion = currentQuestion.nextQuestions.length === 0
+        || currentQuestion.nextQuestions.every((nextQuestion: NextQuestion) => 
+            Object.keys(nextQuestion).length === 0)
+      let nextQuestion = 'end'
+
+      console.log('NEXT QUESTIONS:', JSON.stringify(currentQuestion.nextQuestions))
+      console.log(`IS LAST QUESTION: ${isLastQuestion}`)
+
+      if (!isLastQuestion) {
+        state.history.push({
+          ids: action.payload.ids,
+          questionId: state.currentQuestion
+        })
+        nextQuestion = computeNextQuestion(
+          state.history,
+          currentQuestion,
+          state.questions
+        )
+        console.log({nextQuestion})
+        console.log('\n\n')
+      }
+      state.currentQuestion = nextQuestion
+
     }
   }
 })
 
 export const {
   reset,
-  pushResponse,
-  setCurrentQuestion
+  saveQuestions,
+  goToNextQuestion
 } = questions.actions
 
 export default questions.reducer

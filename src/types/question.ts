@@ -1,12 +1,41 @@
+// TODO: Split this file
+
 import { Document } from "mongoose";
 
 
-interface NumericalComparison {
-  type: string
+export type QuestionConditions = string [] | NumericalComparison []
+
+// TODO: Rename that type
+export type ProcessResponsesOperator = (questionId: string, conditions: QuestionConditions, history: ResponseHistory) => boolean
+export type ProcessNumericalResponseOperator = (questionId: string, conditions: QuestionConditions, history: ResponseHistory) => boolean
+
+export type ProcessPossibleQuestionOperator = (responses: boolean [], history: ResponseHistory) => boolean
+
+export interface ProcessPossibleQuestion {
+  AND: ProcessPossibleQuestionOperator,
+  OR: ProcessPossibleQuestionOperator
+}
+
+export interface ProcessResponses {
+  AND: ProcessResponsesOperator,
+  OR: ProcessResponsesOperator,
+  comparison: ProcessNumericalResponseOperator
+}
+
+
+export type ComparisonOperator = '=' 
+  | '!='
+  | '>='
+  | '<='
+export type ConditionsOperator = 'AND' | 'OR'
+export type ConditionOperator = ConditionsOperator | 'comparison'
+
+export interface NumericalComparison {
+  type: ComparisonOperator
   value: number
 }
 
-interface Condition {
+export interface Condition {
   id: string
   condition: {
     comparison?: NumericalComparison []
@@ -15,7 +44,7 @@ interface Condition {
   }
 }
 
-interface NextQuestion {
+export interface NextQuestion {
   id: string
   conditions: {
     OR?: Condition [];
@@ -48,19 +77,30 @@ export interface QuestionResponse {
   data: Question []
 }
 
-export type InputType = 'text' 
-  | 'number'
-  | 'email'
-  | 'slider'
-  | 'single'
-  | 'multi'
-  | 'single-suggestion'
-  | 'multi-suggestion'
+
+export const numericalInputType = ['number', 'slider']
+export const isNumericalInputType = (type: string) => numericalInputType.includes(type)
+
+export const stringInputType = ['text', 'email', 'single', 'single-suggestion']
+export const isStringInputType = (type: string) => stringInputType.includes(type)
+
+export const arrayinputType = ['multi', 'multi-suggestion']
+export const isArrayInputType = (type: string) => arrayinputType.includes(type)
+
+
+export type NumericalInputType = typeof numericalInputType[number]
+
+export type StringInputType = typeof stringInputType[number]
+
+export type ArrayInputType = typeof arrayinputType[number]
+
+export type InputType = NumericalInputType | StringInputType | ArrayInputType
 
 
 export interface SubmitedResponse {
-  id: string
+  ids: string []
   questionId: string
 }
+
 
 export type ResponseHistory = SubmitedResponse []

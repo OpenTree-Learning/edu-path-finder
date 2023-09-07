@@ -1,16 +1,19 @@
 'use client'
 
 
-import { Field } from 'formik'
+import { Field, useFormikContext } from 'formik'
 import React, { useState } from 'react'
 import { Response } from '../../../../../types/question'
 
 
 interface SingleSuggestionInputProps {
-  responses: Response []
+  responses: Response [],
+  questionId: string
 }
 
 function SingleSuggestionInput (props: SingleSuggestionInputProps) {
+
+  const { setFieldValue, submitForm } = useFormikContext()
 
   const [inputValue, setInputValue] = useState('')
   const [responses, setResponses] = useState<Response[]>(props.responses)
@@ -35,6 +38,9 @@ function SingleSuggestionInput (props: SingleSuggestionInputProps) {
       if (matchingResponse) {
         setSelectedResponse(matchingResponse)
         setInputValue(matchingResponse.text)
+        setFieldValue('response', [matchingResponse.id])
+        submitForm()
+        event.stopPropagation()
       }
     }
   }
@@ -69,11 +75,8 @@ function SingleSuggestionInput (props: SingleSuggestionInputProps) {
 export default function SingleSuggestion (props: any) {
   const responses: Response [] = props.responses as Response []
 
-  return <Field
-    type="single-suggestion"
-    id="response"
-    name="response"
-    inputProps={{responses: responses}}
-    component={SingleSuggestionInput}
+  return <SingleSuggestionInput
+    responses={responses}
+    questionId={props.questionId}
   />
 }
