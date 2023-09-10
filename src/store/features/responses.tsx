@@ -4,6 +4,9 @@ import computeNextQuestion, { getQuestionFromId } from '../../utils/logic/comput
 import { ACTION_PREFETCH } from 'next/dist/client/components/router-reducer/router-reducer-types'
 
 
+
+const DEFAULT_NEXT_QUESTION = 'end'
+
 export interface ResponsesState {
   history: ResponseHistory
   currentQuestion: string,
@@ -25,36 +28,29 @@ export const questions = createSlice({
       state.questions = action.payload
     },
     goToNextQuestion: (state: ResponsesState, action: PayloadAction<SubmitedResponse>) => {
-      const { questionId } = action.payload
+      const { questionId, ids } = action.payload
+      const { history, questions } = state
 
-      if (state.history.find((r: SubmitedResponse) => r.questionId === questionId)) {
+      if (history.find((r: SubmitedResponse) => r.questionId === questionId)) {
         return
       }
 
-      const currentQuestion = getQuestionFromId(state.currentQuestion, state.questions)
+      const currentQuestion = getQuestionFromId(state.currentQuestion, questions)
       const isLastQuestion = currentQuestion.nextQuestions.length === 0
         || currentQuestion.nextQuestions.every((nextQuestion: NextQuestion) => 
             Object.keys(nextQuestion).length === 0)
-      let nextQuestion = 'end'
 
-      console.log('NEXT QUESTIONS:', JSON.stringify(currentQuestion.nextQuestions))
-      console.log(`IS LAST QUESTION: ${isLastQuestion}`)
+      let nextQuestion = DEFAULT_NEXT_QUESTION
 
       if (!isLastQuestion) {
-        state.history.push({
+        history.push({
           ids: action.payload.ids,
           questionId: state.currentQuestion
         })
-        nextQuestion = computeNextQuestion(
-          state.history,
-          currentQuestion,
-          state.questions
-        )
-        console.log({nextQuestion})
-        console.log('\n\n')
+        nextQuestion = computeNextQuestion(history, currentQuestion, questions) || DEFAULT_NEXT_QUESTION
       }
-      state.currentQuestion = nextQuestion
 
+      state.currentQuestion = nextQuestion
     }
   }
 })

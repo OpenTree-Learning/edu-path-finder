@@ -110,11 +110,9 @@ function getQuestionResponses(
 {
   const question: Question = getQuestionFromId(questionId, questions)
   
-  //
-  // TODO: Fix the issue at this line:
-  // TypeError: Cannot read properties of undefined (reading 'responses')
-  //
-
+  if (!question) {
+    return []
+  }
   return question.responses.map((response: Response) => response.id)
 }
 
@@ -207,6 +205,17 @@ export default function computeNextQuestion (
       const conditionOperator: ConditionOperator = Object.keys(condition.condition)[0] as ConditionOperator
       const conditions = getResponseConditions(responseId, condition, conditionOperator, questions)
 
+      /**
+       * 
+       * If we don't find the question in the memory with questionId as id we admit that the current
+       * question conditions are not valid.
+       * 
+       */
+      if (conditions.length === 0) {
+        results.push(false)
+        continue
+      }
+
       const processResponse = processResponses[conditionOperator]
       const processResponseResult = processResponse(responseId, conditions, history)
 
@@ -216,8 +225,6 @@ export default function computeNextQuestion (
        *    false otherwise.
        * 
        */
-      console.log('Next possible question:', questionId)
-      console.log('Next question?', processResponseResult)
       results.push(processResponseResult)
     }
 
@@ -245,8 +252,9 @@ export default function computeNextQuestion (
   }
   /**
    * 
-   * 9. If no conditions are met for none of the next possible questions, it means that we
-   *    are at the end of the form so we return an empty string.
+   * 9. If no conditions are met for none of the next possible questions, it means that 
+   *    either we are at the end of the form or the next possible question was not found
+   *    from its id. In that case we return an empty string.
    * 
    */
   return ''

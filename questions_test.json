@@ -137,7 +137,7 @@
         "id": "preferred_learning_style",
         "conditions": {
           "AND": [
-            {"id": "programming_languages", "condition": {"OR": ["javascript", "python", "java", "csharp", "ruby"]}}
+            {"id": "junior_developer", "condition": {"OR": ["javascript", "python", "java", "csharp", "ruby"]}}
           ]
         }
       }

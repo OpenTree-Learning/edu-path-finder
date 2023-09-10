@@ -5,7 +5,7 @@ import Slider from './inputs/slider'
 import Single from './inputs/single'
 import Multi from './inputs/multi'
 import SingleSuggestion from './inputs/single-suggestion'
-import MultiSuggestion from './inputs/muti-suggestion'
+import MultiSuggestion from './inputs/multi-suggestion/muti-suggestion'
 
 
 export type InputTypeComponentMap = {

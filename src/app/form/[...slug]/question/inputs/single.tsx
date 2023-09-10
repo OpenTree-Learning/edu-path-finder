@@ -11,7 +11,6 @@ export default function Single (props: any) {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     // @ts-ignore
-    console.log('SINGLE INPUT STATE CHANGED')
     setFieldValue('response', {
       ids: [e.target.value],
       questionId: props.questionId
