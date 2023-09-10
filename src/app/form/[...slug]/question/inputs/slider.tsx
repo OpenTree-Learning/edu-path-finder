@@ -81,7 +81,6 @@ function SliderInput ({
   }
 
   function handleMouseUp (e: any) {
-    console.log('REALEASING MOUSE')
     setFieldValue('response', {
       ids: [parseInput(e)],
       questionId: questionId

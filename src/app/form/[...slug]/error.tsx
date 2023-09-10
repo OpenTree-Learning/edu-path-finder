@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect } from "react"
+import EndPage from "./end"
 
 
 export default function Error({
@@ -15,11 +16,10 @@ export default function Error({
   }, [error])
 
   return (
-    <div>
+    <EndPage>
       <h2>Question not found</h2>
       <p>{error.message}</p>
       <a href="#" onClick={() => reset()}>Réessayer</a>
-      <a href="/">Revenir à l'acceuil</a>
-    </div>
+    </EndPage>
   )
 }

@@ -13,6 +13,7 @@ import { ResponsesState, goToNextQuestion, saveQuestions, reset } from '../../..
 import { useAppDispatch, useAppSelector  } from '../../../../store/hooks'
 import computeNextQuestion, { getQuestionFromId } from '../../../../utils/logic/compute_next_question'
 import { displayPartsToString } from 'typescript'
+import EndPage from '../end'
 
 //
 //
@@ -48,12 +49,11 @@ export default function Question(
 
   if (!question) {
     return (
-      <div style={{textAlign: 'center'}}>
+      <EndPage>
         <h2>End of the form!</h2>
         <h3>Thanks for answering all the question!</h3>
         <h3>We're working on building your best learning path!</h3>
-        <button onClick={handleRestart}>Restart form</button>
-      </div>
+      </EndPage>
     )
   }
 
@@ -69,7 +69,6 @@ export default function Question(
   const currentQuestion = useAppSelector((state: any) => state.persistedReducer.currentQuestion)
   const questions = useAppSelector((state: any) => state.persistedReducer.questions)
 
-
   useEffect(() => {
     if (questions.length === 0) {
       dispatch(saveQuestions(loadedQuestions))
@@ -83,9 +82,6 @@ export default function Question(
 
 
   function handleQuestionSubmit (response: SubmitedResponse) {
-    console.log('SUBMIT IS TRIGERED!!', {response})
-
-    // TODO: Receive currentQuestion from the input event.
     dispatch(goToNextQuestion(response))
   }
 

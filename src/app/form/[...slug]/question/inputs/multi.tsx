@@ -23,7 +23,6 @@ export default function Multi (props: any) {
   }
 
   const handleSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
-    console.log('MULTI INPUT SUBMIT:', selectedResponses)
     // @ts-ignore
     setFieldValue('response', {
       ids: selectedResponses,
