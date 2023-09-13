@@ -58,16 +58,25 @@ export default function Question(
   }
 
   const { questionId, text, inputType, inputProps, responses, nextQuestions } = question
+  console.log({
+    isStringInputType: isStringInputType(inputType),
+    isNumericalInputType: isNumericalInputType(inputType),
+    isArrayInputType: isArrayInputType(inputType),
+  })
   const initialValueMap = [
-    [isStringInputType(inputType), inputProps?.defaultValue || responses[0]?.id || ''],
+    [isStringInputType(inputType), inputProps?.defaultValue || (responses && responses.length > 0 ? responses[0]?.id : '')],
     [isNumericalInputType(inputType), inputProps?.defaultValue || inputProps?.min || 0],
-    [isArrayInputType(inputType), inputProps?.defaultValues || [responses[0]?.id] || []]
+    [isArrayInputType(inputType), inputProps?.defaultValues || (responses && responses.length > 0 ? responses[0]?.id : '')]
   ]
   const initialValue = initialValueMap.find((value: any []) => value[0]) as any []
   const initialValues = { response: initialValue[1] }
 
+  console.log({initialValueMap, initialValue, initialValues})
+
   const currentQuestion = useAppSelector((state: any) => state.persistedReducer.currentQuestion)
   const questions = useAppSelector((state: any) => state.persistedReducer.questions)
+
+  console.log({questions})
 
   useEffect(() => {
     if (questions.length === 0) {

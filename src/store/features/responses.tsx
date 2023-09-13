@@ -36,9 +36,8 @@ export const questions = createSlice({
       }
 
       const currentQuestion = getQuestionFromId(state.currentQuestion, questions)
-      const isLastQuestion = currentQuestion.nextQuestions.length === 0
-        || currentQuestion.nextQuestions.every((nextQuestion: NextQuestion) => 
-            Object.keys(nextQuestion).length === 0)
+      const isLastQuestion = currentQuestion && currentQuestion.nextQuestions 
+        && currentQuestion.nextQuestions.length === 0
 
       let nextQuestion = DEFAULT_NEXT_QUESTION
 

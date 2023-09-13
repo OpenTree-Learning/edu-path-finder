@@ -154,6 +154,30 @@
       {"id": "read_write", "text": "Lecture/écriture"},
       {"id": "kinesthetic", "text": "Kinesthésique"}
     ],
-    "nextQuestions": []
+    "nextQuestions": [
+      {
+        "id": "additional_info",
+        "conditions": {
+          "AND": [
+            {"id": "preferred_learning_style", "condition": {"OR": ["visual", "auditory", "read_write", "kinesthetic"]}}
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "questionId": "additional_info",
+    "text": "Qu'est-ce que vous attendez de cette formation ?",
+    "inputType": "text",
+    "nextQuestions": [
+      {
+        "id": "email"
+      }
+    ]
+  },
+  {
+    "questionId": "email",
+    "text": "Voulez-vous recevoir des nouvelles par mail ?",
+    "inputType": "email"
   }
 ]

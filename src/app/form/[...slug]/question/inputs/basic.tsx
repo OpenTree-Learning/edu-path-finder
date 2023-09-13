@@ -4,31 +4,54 @@
 import { Field } from 'formik'
 import { useFormikContext } from 'formik'
 import { copyAndDelete } from '../../../../../utils/helpers/object'
+import { useState } from 'react'
 
 
 function BasicInput (props: any) {
   const { setFieldValue, submitForm } = useFormikContext()
-  const { type } = copyAndDelete(props, ['type', 'id', 'name'])
+  const [input, setInput] = useState<string>('')
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    // @ts-ignore
+  const submit = (value: string) => {
     setFieldValue('response', {
-      ids: [e.target.value],
+      ids: [value],
       questionId: props.questionId
     })
     submitForm()
+  }
+
+  const handleSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
+    // @ts-ignore
+    submit(input)
     e.stopPropagation()
   }
 
-  delete props.defaultValue
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setInput(e.target.value)
+    e.stopPropagation()
+  }
 
-  return <input 
-    type={type}
-    id='response'
-    name='response' 
-    onChange={handleChange}
-    {...props}
-  />
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key == 'Enter') {
+      submit(input)
+      e.stopPropagation()
+    }
+  }
+
+  return (
+    <div>
+      <input 
+        type={props.type}
+        id='response'
+        name='response' 
+        onChange={handleChange}
+        onKeyDown={handleKeyDown}
+        {...props}
+      />
+      <button onClick={handleSubmit}>
+        Submit
+      </button>
+    </div>
+  )
 }
 
 export const Text = (props: any) => <BasicInput {...props} type='text' />

@@ -5,6 +5,7 @@ import { useFormikContext } from 'formik'
 import React, { InputHTMLAttributes, KeyboardEvent, createRef, useEffect, useState } from 'react'
 import { Response, SubmitedResponse } from '../../../../../../types/question'
 
+//@ts-ignore
 import styles from './styles.module.css'
 
 

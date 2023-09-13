@@ -19,7 +19,9 @@ export default async function EndPage ({ children }: any) {
 
   return (
     <div style={{textAlign: 'center'}}>
-      { children }
+      <div>
+        { children }
+      </div>
       <button onClick={handleRestart}>Restart form</button>
     </div>
   )

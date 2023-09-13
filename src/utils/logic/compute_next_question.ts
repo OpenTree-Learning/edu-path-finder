@@ -145,6 +145,9 @@ export default function computeNextQuestion (
    */
   const { nextQuestions }: Question = currentQuestion
 
+  if (!nextQuestions || nextQuestions.length === 0) {
+    return ''
+  }
   /**
    * 
    * 2. Iterate over each next possible question and their conditions.
@@ -171,6 +174,17 @@ export default function computeNextQuestion (
      */
     const question = nextQuestions[i]
     const questionId: string = question.id
+
+    /**
+     * 
+     * If this next possible question has no conditions it's considered as valid.
+     * So it's the next question.
+     * 
+     */
+    if (!question.conditions) {
+      return questionId
+    }
+
     const operator: ConditionsOperator = Object.keys(question.conditions)[0] as ConditionsOperator
     const conditions: Condition [] = question.conditions[operator] as Condition []
 
