@@ -1,0 +1,24 @@
+@import '../../../styles/variables/colors';
+@import '../../../styles/variables/spacings';
+@import '../../../styles/variables/borders';
+
+
+
+.questionLayout {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+    background-color: $color-bg-light-theme;
+
+
+    section {
+        padding: $padding-xl; 
+        width: 70%;
+        height: auto;
+        background-color: #ffffff;
+        border: $border-width-default-transparent-bg solid $color-input-border;
+        border-radius: $border-radius-default;
+    }
+}

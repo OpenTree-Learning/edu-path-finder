@@ -20,19 +20,23 @@ export default function Single (props: any) {
   }
 
   return (
-    <div role="group" aria-labelledby="radio-group">
+    <>
       {responses.map((response: Response, idx: number) => (
-        <label key={idx}>
+        <label
+          key={idx}
+          className='select-item'
+        >
           <input
             type="radio"
             id={response.id}
             name="response"
             value={response.id}
             onChange={handleChange}
+            className='input-default select-item'
           />
           { response.text }
         </label>
       ))}
-    </div>
+    </>
   )
 }

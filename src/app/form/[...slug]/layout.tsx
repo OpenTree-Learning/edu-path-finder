@@ -1,13 +1,17 @@
+import styles from './layout.module.scss';
+
+
+
 export default function QuestionLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
   return (
-    <div className="questionLayout">
-      <div className="questionContainer">
+    <div className={styles.questionLayout}>
+      <section>
         { children }
-      </div>
+      </section>
     </div>
   )
 }

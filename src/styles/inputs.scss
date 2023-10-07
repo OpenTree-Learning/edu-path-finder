@@ -1,0 +1,71 @@
+@import 'variables/typography', 'variables/colors', 'variables/borders', 'variables/spacings';
+
+
+
+@function alternating-color($n) {
+    @if $n % 3 == 1 {
+        @return lighten($color-accent-one, 95%);
+    } @else if $n % 3 == 2 {
+        @return lighten($color-accent-two, 95%);
+    } @else {
+        @return ligthen($color-accent-three, 95%);
+    }
+}
+
+.form-default {
+    display: flex;
+    flex-direction: column;
+
+    & > *:nth-child(n + 0) {
+        background-color: lighten($color-accent-one, 60%) !important;
+    }
+
+    & > *:nth-child(n + 1) {
+        background-color: lighten($color-accent-two, 60%) !important;
+    }
+
+    & > *:nth-child(n + 2) {
+        background-color: lighten($color-accent-three, 60%) !important;
+    }
+
+    button {
+        margin-top: $margin-lg;
+    }
+}
+
+.input-default, .select-item {
+    border-radius: $border-radius-default;
+    border: $border-width-default-transparent-bg solid $color-input-border;
+    padding: $padding-btn;
+}
+
+
+.input-default {
+    font-family: $text-font-body;
+    font-size: $text-size-highlight;
+    filter: brightness(110%);
+    color: $color-text-light-bg;
+    outline: 0px;
+}
+
+.select-item {
+    display: flex;
+    align-items: center;
+    border-style: solid;
+    margin-bottom: $margin-md;
+    background-color: $color-bg-light-theme;
+
+    input[type="checkbox"], input[type='radio'] {
+        margin-right: $margin-lg;
+
+        &:checked {
+            accent-color: $color-accent-one;
+            color: $color-text-dark-bg;
+        }
+    }
+
+    &:hover {
+        cursor: pointer;
+        filter: invert(10%);
+    }
+}

@@ -33,20 +33,29 @@ export default function Multi (props: any) {
   }
 
   return (
-    <div role="group" aria-labelledby="checkbox-group">
+    <>
       {responses.map((response: Response, idx: number) => (
-        <label key={idx}>
+        <label
+          key={idx}
+          className='select-item'
+        >
           <input
             type="checkbox"
             id={response.id}
             name="response"
             value={response.id}
             onChange={handleChange}
+            className='input-default'
           />
           { response.text }
         </label>
       ))}
-      <button onClick={handleSubmit}>Submit</button>
-    </div>
+      <button
+        onClick={handleSubmit}
+        className='btn-default'
+      >
+        Submit
+      </button>
+    </>
   )
 }
