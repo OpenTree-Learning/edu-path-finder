@@ -96,12 +96,12 @@ export default function Question(
 
   return (
     <div className="questionLayout" id={ `question_${questionId}` }>
-      <h2>{ text }</h2>
+      <h3 className='h3'>{ text }</h3>
       <Formik
         initialValues={initialValues}
         onSubmit={(values) => handleQuestionSubmit(values.response)}
       >
-        <Form>
+        <Form className='form-default'>
           <QuestionInput question={question}/>
         </Form>
       </Formik>

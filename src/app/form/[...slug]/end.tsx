@@ -22,7 +22,12 @@ export default async function EndPage ({ children }: any) {
       <div>
         { children }
       </div>
-      <button onClick={handleRestart}>Restart form</button>
+      <button
+        className='.btn-default'
+        onClick={handleRestart}
+      >
+        Restart form
+      </button>
     </div>
   )
 }

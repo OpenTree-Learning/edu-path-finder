@@ -1,0 +1,34 @@
+$spacing-unit: 10px;
+$margin: calc(0.2 * $spacing-unit);
+$padding: calc(0.2 * $spacing-unit);
+
+
+/**
+* Margins
+*/
+$margin-sm: $margin;
+$margin-md: calc(2 * $margin);
+$margin-lg: calc(4 * $margin);
+$margin-xl: calc(8 * $margin);
+
+$margin-bottom-h1: calc(32 * $margin);
+$margin-bottom-h2: calc(22 * $margin);
+$margin-bottom-h3: calc(10 * $margin);
+$margin-bottom-h4: calc(8 * $margin);
+$margin-bottom-paragraph: calc(4 * $margin);
+
+$margin-paragraph: 8px;
+
+/**
+* Padding
+*/
+$padding-sm: $margin;
+$padding-md: calc(2 * $margin);
+$padding-lg: calc(4 * $margin);
+$padding-xl: calc(8 * $margin);
+
+$padding-btn: calc(5 * $padding);
+
+@media screen and (max-width: 500px) {
+    $spacing-unit: 8px;
+}

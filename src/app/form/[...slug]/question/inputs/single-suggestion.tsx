@@ -50,12 +50,13 @@ function SingleSuggestionInput (props: SingleSuggestionInputProps) {
   )
 
   return (
-    <div>
+    <>
       <input
         type="text"
         value={inputValue}
         onChange={handleInputChange}
         onKeyDown={handleInputKeyDown}
+        className='input-default'
       />
       <ul>
         {filteredResponses.map((response: Response) => (
@@ -67,7 +68,7 @@ function SingleSuggestionInput (props: SingleSuggestionInputProps) {
       {selectedResponse && (
         <p>Selected Response: {selectedResponse.text}</p>
       )}
-    </div>
+    </>
   )
 }
 

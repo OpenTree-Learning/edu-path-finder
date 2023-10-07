@@ -1,0 +1,65 @@
+@import '../../../../../../styles/variables/colors';
+
+
+.inputContainer {
+    width: fit-content;
+
+    .input {
+        word-wrap: break-word;
+        max-width: 100%;
+        cursor: text;
+        vertical-align: middle;
+        display: inline-block;
+
+        input {
+            min-width: 15%;
+            max-width: inherit;
+            width: auto;
+            border: 0px;
+            box-shadow: none;
+            outline: none;
+            display: inline;
+            padding: 0px;
+            margin: 0 6px;
+        }
+    }
+
+    .tag {
+        line-height: 190%;
+        white-space: nowrap;
+        vertical-align: baseline;
+        padding: 5px;
+        background-color: $color-accent-one;
+        color: white;
+        margin-left: 5px;
+        border-radius: 5px;
+    }
+
+    .closeTag {
+        padding-left: 5px;
+        padding-right: 5px;
+        margin-left: 5px;
+        border-radius: 5px;
+        background-color: darken($color-accent-one, 10%);
+
+        &:hover {
+            cursor: pointer;
+            filter: brightness(110%);
+        }
+    }
+
+
+    .suggestion, .currentSuggestion {
+        &:hover {
+            cursor: pointer;
+            filter: none !important;
+        }
+    }
+
+
+    .currentSuggestion {
+        background-color: $color-accent-one;
+        color: white;
+    }
+
+}

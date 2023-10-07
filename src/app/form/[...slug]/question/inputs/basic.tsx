@@ -38,19 +38,23 @@ function BasicInput (props: any) {
   }
 
   return (
-    <div>
+    <>
       <input 
         type={props.type}
         id='response'
         name='response' 
         onChange={handleChange}
         onKeyDown={handleKeyDown}
+        className='input-default'
         {...props}
       />
-      <button onClick={handleSubmit}>
+      <button
+        onClick={handleSubmit}
+        className='btn-default'
+      >
         Submit
       </button>
-    </div>
+    </>
   )
 }
 

@@ -1,0 +1,44 @@
+@import 'variables/typography', 'variables/colors', 'variables/borders', 'variables/spacings';
+
+
+
+.link-default {
+    font-family: $text-font-body;
+    font-size: $text-size-paragraph;
+    color: $color-secondary;
+    text-decoration: none;
+}
+
+.btn-default, .btn-cancel {
+    font-family: $text-font-body;
+    font-size: $text-size-highlight;
+    border-radius: $border-radius-default;
+    
+    a {
+        text-decoration: none;
+        color: $color-text-dark-bg;
+    }
+}
+
+.btn-default {
+    border-width: $border-width-default;
+    background-color: $color-secondary;
+    color: $color-text-dark-bg;
+    padding: $padding-btn;
+
+    &:hover {
+        cursor: pointer;
+        filter: brightness(110%);
+    }
+}
+
+.btn-cancel {
+    border-width: $border-width-default-transparent-bg;
+    background-color: transparent;
+    color: $color-text-light-bg;
+
+    &:hover {
+        cursor: pointer;
+        filter: brightness(110%);
+    }
+}

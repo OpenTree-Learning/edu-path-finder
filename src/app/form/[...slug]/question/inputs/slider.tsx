@@ -89,7 +89,7 @@ function SliderInput ({
   }
 
   return (
-    <div>
+    <>
       <input
         type="range"
         min={min}
@@ -98,6 +98,7 @@ function SliderInput ({
         value={value}
         onChange={handleChange}
         onMouseUp={handleMouseUp}
+        className='input-default'
       />
       {/*
       <SliderWrapper
@@ -110,7 +111,7 @@ function SliderInput ({
       />
       */}
       <p>{ value }</p>
-    </div>
+    </>
   )
 }
 

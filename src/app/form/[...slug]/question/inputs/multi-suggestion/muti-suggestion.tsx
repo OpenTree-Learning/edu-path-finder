@@ -2,11 +2,11 @@
 
 
 import { useFormikContext } from 'formik'
-import React, { InputHTMLAttributes, KeyboardEvent, createRef, useEffect, useState } from 'react'
+import React, { createRef, useState } from 'react'
 import { Response, SubmitedResponse } from '../../../../../../types/question'
 
 //@ts-ignore
-import styles from './styles.module.css'
+import styles from './styles.module.scss'
 
 
 interface MultiSuggestionInputProps {
@@ -176,7 +176,7 @@ function MultiSuggestionInput({
   return (
     <>
       <label className={styles.inputContainer} htmlFor='input'>
-        <div className={styles.input}>
+        <div className={`${styles.input} input-default`}>
           {tags.map((tag, idx) => (
             <span key={idx} className={styles.tag}>
               {tag.text}
@@ -196,6 +196,7 @@ function MultiSuggestionInput({
             onKeyDown={handleKeyDown}
             ref={inputRef}
             autoFocus
+            className='input-default'
           />
         </div>
         <div className={styles.suggestions}>
@@ -203,7 +204,7 @@ function MultiSuggestionInput({
             <>
               {(suggestion.text === input.text) ? (
                 <div 
-                  className={styles.currentSuggestion}
+                  className={`${styles.currentSuggestion} select-item`}
                   key={idx}
                   onClick={(e: React.MouseEvent<HTMLDivElement>) => handleSuggestionClick(e, idx)}
                 >
@@ -211,7 +212,7 @@ function MultiSuggestionInput({
                 </div>
               ): (
                 <div
-                  className={styles.suggestion}
+                  className={`${styles.suggestion} select-item`}
                   key={idx}
                   onMouseEnter={(e: React.MouseEvent<HTMLDivElement>) => handleSuggestionHover(e, idx)}
                 >
@@ -222,7 +223,12 @@ function MultiSuggestionInput({
           ))}
         </div>
       </label>
-      <button onClick={handleSubmit}>Valider</button>
+      <button
+        onClick={handleSubmit}
+        className='btn-default'
+      >
+        Valider
+      </button>
     </>
   )
 }
