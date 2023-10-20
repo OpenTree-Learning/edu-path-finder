@@ -1,5 +1,8 @@
 import { preloadQuestions } from './form/[...slug]/page';
 
+import styles from './page.module.scss';
+import Particles from '../lib/components/particles/particles';
+
 
 
 export default async function Home() {
@@ -7,18 +10,32 @@ export default async function Home() {
   preloadQuestions()
 
   return (
-    <div>
-      <div>
-        <span className='p'>Whoever you are, whatever your goals or your level</span>
-        <span className='p'>We can find your unique path in the tree of knowledges</span>
-        <span className='p'>And you know what? You can at any time change your way in the tree.</span>
-        <span className='p'>Who knows maybe your more intersted in a different career?</span>
+    <>
+      <div className={styles.header}>
+        {/*<div className={styles.background}></div>*/}
+        <Particles />
+        <div className={styles.logo}>
+          <img src='static/images/logo.svg'/>
+        </div>
+        <div className={styles.text}>
+          <span className='h3'>
+            I want to <span id={styles.learnProgramming}>learn programming</span>, 
+            but <span id={styles.whereToStart}>where to start?</span>
+          </span>
+          <span className='h4'>
+            We find your <span id={styles.learningPath}>unique learning path </span>
+            to IT career.
+          </span>
+          <div>
+            <button className='btn-default'>
+              <img src='static/images/search_icon.svg'/>
+              <a href='/form/experience'>Find my training path</a>
+            </button>
+          </div>
+        </div>
       </div>
-      <div>
-        <button className='btn-default'>
-          <a href='/form/experience'>Start your journey!</a>
-        </button>
+      <div className={styles.steps}>
       </div>
-    </div>
+    </>
   );
 }

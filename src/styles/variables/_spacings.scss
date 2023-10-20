@@ -27,7 +27,7 @@ $padding-md: calc(2 * $margin);
 $padding-lg: calc(4 * $margin);
 $padding-xl: calc(8 * $margin);
 
-$padding-btn: calc(5 * $padding);
+$padding-btn: calc(8 * $padding);
 
 @media screen and (max-width: 500px) {
     $spacing-unit: 8px;
