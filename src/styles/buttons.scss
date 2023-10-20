@@ -1,6 +1,19 @@
 @import 'variables/typography', 'variables/colors', 'variables/borders', 'variables/spacings';
 
 
+.link-default, .btn-default, .btn-cancel {
+    display: flex;
+    align-items: center;
+    padding: $padding-btn;
+
+    font-style: bold;
+
+    img {
+        margin-right: $margin-lg;
+        width: calc(10 * $margin);
+        height: calc(10 * $margin);
+    }
+}
 
 .link-default {
     font-family: $text-font-body;
@@ -24,11 +37,14 @@
     border-width: $border-width-default;
     background-color: $color-secondary;
     color: $color-text-dark-bg;
-    padding: $padding-btn;
 
     &:hover {
         cursor: pointer;
         filter: brightness(110%);
+    }
+
+    img {
+        filter: brightness(0) invert(1)
     }
 }
 

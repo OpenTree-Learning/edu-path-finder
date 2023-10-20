@@ -1,7 +1,11 @@
+@import 'variables/colors';
 @import 'variables/typography';
 
 
 
 body {
     font-family: $text-font-body;
+    background-color: $color-bg-light-theme;
+    padding: 0px;
+    margin: 0px;
 }
