@@ -95,7 +95,7 @@ export default function Question(
   }
 
   return (
-    <div className="questionLayout" id={ `question_${questionId}` }>
+    <div className="question" id={ `question_${questionId}` }>
       <h3 className='h3'>{ text }</h3>
       <Formik
         initialValues={initialValues}

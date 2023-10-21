@@ -8,17 +8,35 @@
     display: flex;
     align-items: center;
     justify-content: center;
+
     width: 100vw;
     height: 100vh;
+
     background-color: $color-bg-light-theme;
 
 
     section {
-        padding: $padding-xl; 
-        width: 70%;
-        height: auto;
+        padding: calc(16 * $padding); 
+        width: 50%;
+
         background-color: #ffffff;
+
         border: $border-width-default-transparent-bg solid $color-input-border;
         border-radius: $border-radius-default;
+        box-shadow: 10px 5px 5px #a1a1a1;
+
+        div {
+
+            h3 {
+                margin-top: 0px;
+                display: block;
+            }
+
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+
+            height: 100%;
+        }
     }
 }
