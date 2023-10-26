@@ -1,0 +1,57 @@
+@import '../../../styles/variables/colors';
+@import '../../../styles/variables/spacings';
+@import '../../../styles/variables/borders';
+
+
+
+.progressBar {
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    width: 100%;
+
+    div > svg {
+        //box-shadow: 0px 5px 0px 0px darken($color-bg-light-theme, 3%) !important;
+        border-radius: 50%;
+        padding: $margin-lg;
+        aspect-ratio: 1;
+    }
+
+    div:nth-child(1) > svg {
+        color: $color-accent-one;
+        margin-right: $margin-lg;
+    }
+
+    div:nth-child(3) > svg {
+        color: lighten($color-accent-one, 30%);
+        margin-left: $margin-lg;
+    }
+
+    .bar {
+        height: 6px;
+    }
+
+    & > span, .bar {
+        display: flex;
+
+        width: 100% !important;
+        background-color: darken($color-bg-light-theme, 10%) !important;
+        border-radius: 5px;
+        //box-shadow: 5px 5px 5px 5px darken($color-bg-light-theme, 3%) !important;
+
+        & > span:nth-child(1) {
+            border-radius: 5px 0px 0px 5px;
+        }
+
+        & > span:last-child {
+            border-radius: 0px 5px 5px 0px;
+        }
+
+        & > span {
+            display: block;
+            background-color: $color-accent-one !important;
+        }
+    }
+}
