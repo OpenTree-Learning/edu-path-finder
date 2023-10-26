@@ -201,11 +201,10 @@ function MultiSuggestionInput({
         </div>
         <div className={styles.suggestions}>
           {suggestions.map((suggestion, idx) => (
-            <>
+            <div key={idx}>
               {(suggestion.text === input.text) ? (
                 <div 
                   className={`${styles.currentSuggestion} select-item`}
-                  key={idx}
                   onClick={(e: React.MouseEvent<HTMLDivElement>) => handleSuggestionClick(e, idx)}
                 >
                   { suggestion.text }
@@ -213,19 +212,19 @@ function MultiSuggestionInput({
               ): (
                 <div
                   className={`${styles.suggestion} select-item`}
-                  key={idx}
                   onMouseEnter={(e: React.MouseEvent<HTMLDivElement>) => handleSuggestionHover(e, idx)}
                 >
                   { suggestion.text }
                 </div>
               )} 
-            </>
+            </div>
           ))}
         </div>
       </label>
       <button
         onClick={handleSubmit}
         className='btn-default'
+        type='submit'
       >
         Valider
       </button>

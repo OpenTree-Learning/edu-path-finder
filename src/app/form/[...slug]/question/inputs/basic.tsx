@@ -4,14 +4,35 @@
 import { Field } from 'formik'
 import { useFormikContext } from 'formik'
 import { copyAndDelete } from '../../../../../utils/helpers/object'
-import { useState } from 'react'
+import { use, useEffect, useState } from 'react'
+import { DEFAULT_NEXT_QUESTION } from 'store/features/responses'
 
 
 function BasicInput (props: any) {
   const { setFieldValue, submitForm } = useFormikContext()
+  const [inputProps, setInputProps] = useState<any>({})
   const [input, setInput] = useState<string>('')
 
+  console.log('COUCOU')
+
+  useEffect(() => {
+    let propsCopy = Object.assign({}, props)
+
+    delete propsCopy.questionId
+    delete propsCopy.responses
+
+    setInputProps(propsCopy)
+  }, [props])
+
   const submit = (value: string) => {
+
+    console.log({value})
+    console.log('SUBMIT')
+
+    if (!props.questionId) {
+      return
+    }
+
     setFieldValue('response', {
       ids: [value],
       questionId: props.questionId
@@ -37,6 +58,9 @@ function BasicInput (props: any) {
     }
   }
 
+  // TODO: Props contains 'questionId' which is not 
+  //       an input element attribute.
+
   return (
     <>
       <input 
@@ -46,11 +70,12 @@ function BasicInput (props: any) {
         onChange={handleChange}
         onKeyDown={handleKeyDown}
         className='input-default'
-        {...props}
+        {...inputProps}
       />
       <button
         onClick={handleSubmit}
         className='btn-default'
+        type='submit'
       >
         Submit
       </button>

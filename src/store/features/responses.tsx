@@ -1,22 +1,26 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { ResponseHistory, SubmitedResponse, Question, NextQuestion } from '../../types/question'
-import computeNextQuestion, { getQuestionFromId } from '../../utils/logic/compute_next_question'
+import computeNextQuestion from '../../utils/logic/compute_next_question'
+import { getQuestionFromId } from 'utils/logic/get_question'
 import { ACTION_PREFETCH } from 'next/dist/client/components/router-reducer/router-reducer-types'
+import { computeNextPossibleQuestions } from 'utils/logic/compute_next_possible_questions'
 
 
 
-const DEFAULT_NEXT_QUESTION = 'end'
+export const DEFAULT_NEXT_QUESTION = 'end'
 
 export interface ResponsesState {
   history: ResponseHistory
   currentQuestion: string,
-  questions: Question []
+  questions: Question [],
+  nextPossibleQuestions: Question []
 }
 
 const initialState: ResponsesState = {
   history: [],
   currentQuestion: 'experience',
-  questions: []
+  questions: [],
+  nextPossibleQuestions: []
 }
 
 export const questions = createSlice({
@@ -42,11 +46,23 @@ export const questions = createSlice({
       let nextQuestion = DEFAULT_NEXT_QUESTION
 
       if (!isLastQuestion) {
+
+        state.nextPossibleQuestions = computeNextPossibleQuestions(
+          state.currentQuestion,
+          ids,
+          history,
+          questions
+        )
+
+        if (state.nextPossibleQuestions.length) {
+          nextQuestion = state.nextPossibleQuestions[0].questionId
+        }
+
         history.push({
           ids: action.payload.ids,
           questionId: state.currentQuestion
         })
-        nextQuestion = computeNextQuestion(history, currentQuestion, questions) || DEFAULT_NEXT_QUESTION
+
       }
 
       state.currentQuestion = nextQuestion

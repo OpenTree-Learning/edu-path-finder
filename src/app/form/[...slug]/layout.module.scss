@@ -5,9 +5,9 @@
 
 
 .questionLayout {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: repeat(11, 1fr);
+    grid-template-rows: repeat(13, 1fr);
 
     width: 100vw;
     height: 100vh;
@@ -15,15 +15,25 @@
     background-color: $color-bg-light-theme;
 
 
-    section {
-        padding: calc(16 * $padding); 
-        width: 50%;
+    .progressBarLayout {
+        grid-area: 2 / 3 / 3 / 10;
 
-        background-color: #ffffff;
+        //width: calc(284.4 * $margin);
+    }
+
+
+    section {
+        grid-area: 4 / 4 / 12 / 9;
+
+        padding: calc(16 * $padding); 
+
+        //width: calc(250 * $margin);
+
+        background-color: lighten($color-secondary, 55%);
 
         border: $border-width-default-transparent-bg solid $color-input-border;
         border-radius: $border-radius-default;
-        box-shadow: 10px 5px 5px #a1a1a1;
+        box-shadow: 15px 15px 15px darken($color-bg-light-theme, 10%);
 
         div {
 

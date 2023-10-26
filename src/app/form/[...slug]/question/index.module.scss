@@ -1,0 +1,8 @@
+@import '../../../../styles/variables/spacings';
+
+
+.question {
+    h3 {
+        margin-bottom: calc(25 * $margin) !important;
+    }
+}

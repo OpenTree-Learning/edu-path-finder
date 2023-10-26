@@ -16,6 +16,9 @@ import {
 } from '../../types/question'
 
 
+import { getQuestionFromId, getQuestionResponses, getResponseConditions } from './get_question'
+
+
 
 function processResponsesLogical(
   questionId: string,
@@ -25,6 +28,10 @@ function processResponsesLogical(
 ): boolean
 {
   const submittedResponse = history.find((response: SubmitedResponse) => response.questionId === questionId)
+
+  if (!submittedResponse) {
+    return false
+  }
   //
   // TODO: Fix this bug:
   //
@@ -53,6 +60,11 @@ function processResponsesNumerical(
 {
   // TODO: Make sure this function works (need to test with comparison condition).
   const submittedResponse = history.find((response: SubmitedResponse) => response.questionId === questionId)
+
+  if (!submittedResponse) {
+    return false
+  }
+
   const submittedValue = Number(submittedResponse?.ids[0]) as number
   const processComparison = {
     '=': (a: number, b: number) => a == b,
@@ -90,51 +102,10 @@ const processResponses: ProcessResponses =
 }
 
 
-export function getQuestionFromId(
-  questionId: string,
-  questions: Question []
-): Question 
-{
-  const question: Question = questions.find(
-    (question: Question) => question.questionId == questionId
-  ) as Question
-
-  return question
-}
-
-
-function getQuestionResponses(
-  questionId: string,
-  questions: Question []
-): string []
-{
-  const question: Question = getQuestionFromId(questionId, questions)
-  
-  if (!question) {
-    return []
-  }
-  return question.responses.map((response: Response) => response.id)
-}
-
-
-function getResponseConditions(
-  questionId: string,
-  condition: Condition,
-  operator: ConditionOperator,
-  questions: Question []  
-): QuestionConditions 
-{
-  if (operator == 'comparison') {
-    return condition.condition.comparison as QuestionConditions
-  }
-
-  return getQuestionResponses(questionId, questions)
-}
-
 
 export default function computeNextQuestion (
-  history: ResponseHistory,
   currentQuestion: Question,
+  history: ResponseHistory,
   questions: Question []
 ): string
 {
@@ -271,5 +242,8 @@ export default function computeNextQuestion (
    *    from its id. In that case we return an empty string.
    * 
    */
-  return ''
+  if (nextQuestions.length === 0) {
+    return ''
+  }
+  return nextQuestions[0].id
 }

@@ -1,7 +1,6 @@
 'use client'
 
-import { useSelector } from 'react-redux'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 
 import { isStringInputType, isNumericalInputType, isArrayInputType, SubmitedResponse } from '../../../../types/question'
@@ -9,11 +8,11 @@ import { Question as QuestionType } from '../../../../types/question'
 import QuestionInput from './question-input'
 import { Form, Formik } from 'formik'
 
-import { ResponsesState, goToNextQuestion, saveQuestions, reset } from '../../../../store/features/responses'
+import { goToNextQuestion, saveQuestions, reset } from '../../../../store/features/responses'
 import { useAppDispatch, useAppSelector  } from '../../../../store/hooks'
-import computeNextQuestion, { getQuestionFromId } from '../../../../utils/logic/compute_next_question'
-import { displayPartsToString } from 'typescript'
 import EndPage from '../end'
+
+import styles from './index.module.scss'
 
 //
 //
@@ -58,11 +57,6 @@ export default function Question(
   }
 
   const { questionId, text, inputType, inputProps, responses, nextQuestions } = question
-  console.log({
-    isStringInputType: isStringInputType(inputType),
-    isNumericalInputType: isNumericalInputType(inputType),
-    isArrayInputType: isArrayInputType(inputType),
-  })
   const initialValueMap = [
     [isStringInputType(inputType), inputProps?.defaultValue || (responses && responses.length > 0 ? responses[0]?.id : '')],
     [isNumericalInputType(inputType), inputProps?.defaultValue || inputProps?.min || 0],
@@ -71,12 +65,8 @@ export default function Question(
   const initialValue = initialValueMap.find((value: any []) => value[0]) as any []
   const initialValues = { response: initialValue[1] }
 
-  console.log({initialValueMap, initialValue, initialValues})
-
   const currentQuestion = useAppSelector((state: any) => state.persistedReducer.currentQuestion)
   const questions = useAppSelector((state: any) => state.persistedReducer.questions)
-
-  console.log({questions})
 
   useEffect(() => {
     if (questions.length === 0) {
@@ -95,7 +85,7 @@ export default function Question(
   }
 
   return (
-    <div className="question" id={ `question_${questionId}` }>
+    <div className={styles.question} id={ `question_${questionId}` }>
       <h3 className='h3'>{ text }</h3>
       <Formik
         initialValues={initialValues}

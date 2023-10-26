@@ -53,6 +53,7 @@ export default function Multi (props: any) {
       <button
         onClick={handleSubmit}
         className='btn-default'
+        type='submit'
       >
         Submit
       </button>
