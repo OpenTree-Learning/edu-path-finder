@@ -13,8 +13,6 @@ function BasicInput (props: any) {
   const [inputProps, setInputProps] = useState<any>({})
   const [input, setInput] = useState<string>('')
 
-  console.log('COUCOU')
-
   useEffect(() => {
     let propsCopy = Object.assign({}, props)
 
@@ -25,9 +23,6 @@ function BasicInput (props: any) {
   }, [props])
 
   const submit = (value: string) => {
-
-    console.log({value})
-    console.log('SUBMIT')
 
     if (!props.questionId) {
       return

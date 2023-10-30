@@ -14,6 +14,8 @@ export async function GET () {
     { status: 500 }
   )
 
+  const debug = await Question.countDocuments({})
+
   try {
     res = await Question.find({})
   } catch (e: any) {

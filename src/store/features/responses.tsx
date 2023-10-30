@@ -1,8 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { ResponseHistory, SubmitedResponse, Question, NextQuestion } from '../../types/question'
-import computeNextQuestion from '../../utils/logic/compute_next_question'
 import { getQuestionFromId } from 'utils/logic/get_question'
-import { ACTION_PREFETCH } from 'next/dist/client/components/router-reducer/router-reducer-types'
 import { computeNextPossibleQuestions } from 'utils/logic/compute_next_possible_questions'
 
 
