@@ -7,9 +7,9 @@
       "defaultValue": "beginner"
     },
     "responses": [
-      {"id": "beginner", "text": "Débutant(e)"},
-      {"id": "intermediate", "text": "Intermédiaire"},
-      {"id": "advanced", "text": "Avancé(e)"}
+      {"id": "beginner", "text": "Débutant(e)", "iconName": "fa-solid fa-baby"},
+      {"id": "intermediate", "text": "Intermédiaire", "iconName": "fa-solid fa-child-reaching"},
+      {"id": "advanced", "text": "Avancé(e)", "iconName": "fa-solid fa-shield-halved"}
     ],
     "nextQuestions": [
       {
@@ -149,10 +149,10 @@
     "inputType": "single",
     "inputProps": {},
     "responses": [
-      {"id": "visual", "text": "Visuel"},
-      {"id": "auditory", "text": "Auditif"},
-      {"id": "read_write", "text": "Lecture/écriture"},
-      {"id": "kinesthetic", "text": "Kinesthésique"}
+      {"id": "visual", "text": "Visuel", "iconName": "fa-solid fa-eye"},
+      {"id": "auditory", "text": "Auditif", "iconName": "fa-solid fa-ear-listen"},
+      {"id": "read_write", "text": "Lecture/écriture", "iconName": "fa-solid fa-book"},
+      {"id": "kinesthetic", "text": "Kinesthésique", "iconName": "fa-solid fa-person"}
     ],
     "nextQuestions": [
       {

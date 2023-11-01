@@ -55,6 +55,7 @@ export interface NextQuestion {
 export interface Response {
   id: string
   text: string
+  iconName: string
 }
 
 export interface Question {

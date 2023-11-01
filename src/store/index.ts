@@ -2,16 +2,23 @@ import storage from 'redux-persist/lib/storage'
 import { persistStore, persistReducer } from 'redux-persist'
 import { configureStore } from '@reduxjs/toolkit'
 import questionsReducer from './features/responses'
+import iconsReducer from './features/icons'
 
 
-const persistedReducer = persistReducer({
-  key: 'root',
+const persistedQuestionsReducer = persistReducer({
+  key: 'questions',
   storage
 }, questionsReducer)
 
+const persistedIconsReducer = persistReducer({
+  key: 'icons',
+  storage
+}, iconsReducer)
+
 export const store = configureStore({
   reducer: {
-    persistedReducer
+    persistedQuestionsReducer,
+    persistedIconsReducer
   },
   devTools: process.env.NODE_ENV !== 'production'
 })
