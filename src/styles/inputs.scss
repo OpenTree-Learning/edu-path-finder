@@ -1,35 +1,32 @@
 @import 'variables/typography', 'variables/colors', 'variables/borders', 'variables/spacings';
 
-
-
-@function alternating-color($n) {
-    @if $n % 3 == 1 {
-        @return lighten($color-accent-one, 95%);
-    } @else if $n % 3 == 2 {
-        @return lighten($color-accent-two, 95%);
-    } @else {
-        @return ligthen($color-accent-three, 95%);
-    }
-}
-
 .form-default {
     display: flex;
     flex-direction: column;
 
-    & > *:nth-child(n + 0) {
-        background-color: lighten($color-accent-one, 60%) !important;
-    }
-
-    & > *:nth-child(n + 1) {
-        background-color: lighten($color-accent-two, 60%) !important;
-    }
-
-    & > *:nth-child(n + 2) {
-        background-color: lighten($color-accent-three, 60%) !important;
-    }
-
     button {
         margin-top: $margin-lg;
+    }
+
+    div {
+
+        & > div {
+            color: $color-text-light-bg;
+        }
+
+        // TODO: Change bg colors order
+
+        div:nth-child(3n) {
+            background-color: $color-btn-one;
+        }
+
+        div:nth-child(3n - 1) {
+            background-color: $color-btn-two;
+        }
+
+        div:nth-child(3n - 2) {
+            background-color: $color-btn-three;
+        }
     }
 }
 
@@ -53,7 +50,7 @@
     align-items: center;
     border-style: solid;
     margin-bottom: $margin-md;
-    background-color: $color-bg-light-theme;
+    background-color: #ffffff;
 
     input[type="checkbox"], input[type='radio'] {
         margin-right: $margin-lg;
@@ -63,6 +60,7 @@
             color: $color-text-dark-bg;
         }
     }
+
 
     &:hover {
         cursor: pointer;

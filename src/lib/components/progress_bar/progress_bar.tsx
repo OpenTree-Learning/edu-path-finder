@@ -18,10 +18,10 @@ function ProgressBar ()
   const [width, setWidth] = useState<number>(0)
   const [stepWidth, setStepWidth] = useState<number>(0)
 
-  const questions = useAppSelector((state: any) => state.persistedReducer.questions)
-  const history = useAppSelector((state: any) => state.persistedReducer.history)
+  const questions = useAppSelector((state: any) => state.persistedQuestionsReducer.questions)
+  const history = useAppSelector((state: any) => state.persistedQuestionsReducer.history)
   const nextPossibleQuestions = useAppSelector((state: any) =>
-    state.persistedReducer.nextPossibleQuestions)
+    state.persistedQuestionsReducer.nextPossibleQuestions)
 
   const barRef = useRef(null);
 

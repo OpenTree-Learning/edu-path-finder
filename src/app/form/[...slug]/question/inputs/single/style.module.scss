@@ -1,0 +1,17 @@
+@import '../../../../../../styles/variables/spacings';
+
+
+.responseItem {
+    flex-direction: row !important;
+    justify-content: flex-start !important;
+
+    margin-bottom: calc(6 * $margin);
+
+    svg {
+        //width: calc(3 * $spacing-unit);
+        height: calc(2 * $spacing-unit);
+        aspect-ratio: 1;
+        margin-right: $margin-xl;
+    }
+
+}

@@ -65,8 +65,8 @@ export default function Question(
   const initialValue = initialValueMap.find((value: any []) => value[0]) as any []
   const initialValues = { response: initialValue[1] }
 
-  const currentQuestion = useAppSelector((state: any) => state.persistedReducer.currentQuestion)
-  const questions = useAppSelector((state: any) => state.persistedReducer.questions)
+  const currentQuestion = useAppSelector((state: any) => state.persistedQuestionsReducer.currentQuestion)
+  const questions = useAppSelector((state: any) => state.persistedQuestionsReducer.questions)
 
   useEffect(() => {
     if (questions.length === 0) {

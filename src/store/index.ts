@@ -4,14 +4,15 @@ import { configureStore } from '@reduxjs/toolkit'
 import questionsReducer from './features/responses'
 
 
-const persistedReducer = persistReducer({
-  key: 'root',
+
+const persistedQuestionsReducer = persistReducer({
+  key: 'questions',
   storage
 }, questionsReducer)
 
 export const store = configureStore({
   reducer: {
-    persistedReducer
+    persistedQuestionsReducer,
   },
   devTools: process.env.NODE_ENV !== 'production'
 })
