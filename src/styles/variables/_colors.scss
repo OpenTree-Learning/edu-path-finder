@@ -9,6 +9,16 @@ $color-accent-one: #ffa500;
 $color-accent-two: #4CBB17;
 $color-accent-three: #A069CB;
 
+
+/**
+* Buttons
+*/
+
+$color-btn-one: lighten($color-accent-three, 25%);
+$color-btn-two: lighten($color-accent-one, 35%);
+$color-btn-three: lighten($color-accent-two, 40%);
+
+
 /**
 * Background
 */
