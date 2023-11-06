@@ -6,8 +6,8 @@
 
 .questionLayout {
     display: grid;
-    grid-template-columns: repeat(11, 1fr);
-    grid-template-rows: repeat(13, 1fr);
+    grid-template-columns: repeat(13, 1fr);
+    grid-template-rows: repeat(15, 1fr);
 
     width: 100vw;
     height: 100vh;
@@ -16,18 +16,14 @@
 
 
     .progressBarLayout {
-        grid-area: 2 / 3 / 3 / 10;
-
-        //width: calc(284.4 * $margin);
+        grid-area: 2 / 3 / 3 / 12;
     }
 
 
     section {
-        grid-area: 4 / 4 / 12 / 9;
+        grid-area: 5 / 5 / 14 / 10;
 
         padding: calc(16 * $padding); 
-
-        //width: calc(250 * $margin);
 
         background-color: lighten($color-secondary, 55%);
 
