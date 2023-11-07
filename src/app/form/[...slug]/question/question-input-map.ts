@@ -1,7 +1,7 @@
 import { InputType } from '../../../../types/question'
 
 import { Text, Number, Email } from './inputs/basic'
-import Slider from './inputs/slider'
+import Slider from './inputs/slider/index'
 import Single from './inputs/single/index'
 import Multi from './inputs/multi'
 import SingleSuggestion from './inputs/single-suggestion'
